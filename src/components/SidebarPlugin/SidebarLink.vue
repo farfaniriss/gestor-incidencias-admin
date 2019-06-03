@@ -1,18 +1,30 @@
 <template>
-  <li class="md-list-item">
-    <router-link
-      class="md-list-item-router md-list-item-container md-button-clean"
-      @click="hideSidebar"
-      v-bind="$attrs"
-    >
-      <div class="md-list-item-content md-ripple">
-        <slot>
-          <md-icon>{{ link.icon }}</md-icon>
-          <p>{{ link.name }}</p>
-        </slot>
-      </div>
-    </router-link>
-  </li>
+  <div>
+    <md-list-item>
+      <slot>
+        <md-icon>dashboard</md-icon>
+        <p>Dashboard</p>
+      </slot>
+    </md-list-item>
+    <md-list-item md-expand>
+      <md-icon>content_paste</md-icon>
+      <p>Incidencias</p>
+      <md-list slot="md-expand">
+        <router-link to="/registro" class="md-inset pl-2 item-text">
+          <md-list-item>Registro</md-list-item>
+        </router-link>
+        <router-link to="/historial" class="md-inset pl-2 item-text">
+          <md-list-item>Historial</md-list-item>
+        </router-link>
+      </md-list>
+    </md-list-item>
+    <md-list-item>
+      <md-icon>person</md-icon>
+      <p>
+        <router-link to="/user">Perfil</router-link>
+      </p>
+    </md-list-item>
+  </div>
 </template>
 <script>
 export default {
@@ -28,7 +40,12 @@ export default {
         return {
           name: "",
           path: "",
-          icon: ""
+          icon: "",
+          sublink: {
+            name: "",
+            path: "",
+            icon: ""
+          }
         };
       }
     },
@@ -50,4 +67,12 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+.pl-2 {
+  padding-left: 1.5rem;
+}
+
+.md-list-item-container {
+  font-size: 14px !important;
+}
+</style>

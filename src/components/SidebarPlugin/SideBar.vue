@@ -8,21 +8,14 @@
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-img">
-          <img :src="imgLogo" alt="" />
+          <img :src="imgLogo" alt>
         </div>
       </a>
-
-      <a
-        href="https://www.creative-tim.com/product/vue-material-dashboard"
-        target="_blank"
-        class="simple-text logo-normal"
-      >
-        {{ title }}
-      </a>
+      <a href="#/user" target="_blank" class="simple-text logo-normal">{{ title }}</a>
     </div>
     <div class="sidebar-wrapper">
       <slot name="content"></slot>
-      <md-list class="nav">
+      <md-list class="nav" :md-expand-single="expandSingle">
         <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
         <slot>
           <sidebar-link
@@ -30,8 +23,7 @@
             :key="link.name + index"
             :to="link.path"
             :link="link"
-          >
-          </sidebar-link>
+          ></sidebar-link>
         </slot>
       </md-list>
     </div>
@@ -47,7 +39,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD"
+      default: "Jhon Doe"
     },
     backgroundImage: {
       type: String,
@@ -55,7 +47,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/vue-logo.png")
+      default: "https://randomuser.me/api/portraits/men/85.jpg"
     },
     activeColor: {
       type: String,
@@ -73,6 +65,11 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  data() {
+    return {
+      expandSingle: true
+    };
   },
   provide() {
     return {

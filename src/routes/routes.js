@@ -8,6 +8,9 @@ import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
 import Notifications from "@/pages/Notifications.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
+import RegistroIncidencia from "@/pages/RegistroIncidencia/RegistroIncidencia.vue";
+import HistorialIncidencia from "@/pages/HistorialIncidencia/HistorialIncidencia.vue";
+import SeguimientoIncidencia from "@/pages/SeguimientoIncidencia/SeguimientoIncidencia.vue";
 
 const routes = [
   {
@@ -22,7 +25,7 @@ const routes = [
       },
       {
         path: "user",
-        name: "User Profile",
+        name: "Perfil de usuario",
         component: UserProfile
       },
       {
@@ -57,6 +60,21 @@ const routes = [
         path: "upgrade",
         name: "Upgrade to PRO",
         component: UpgradeToPRO
+      },
+      {
+        path: "registro",
+        name: "Registro de incidencia",
+        component: RegistroIncidencia
+      },
+      {
+        path: "historial",
+        name: "Historial de incidencia",
+        component: HistorialIncidencia
+      },
+      {
+        path: "/incidencia/:id",
+        name: "Seguimiento de incidencia",
+        component: SeguimientoIncidencia
       }
     ]
   }

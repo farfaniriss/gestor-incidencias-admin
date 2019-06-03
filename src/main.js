@@ -4,6 +4,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App";
 
+import Vuesax from "vuesax";
+import "vuesax/dist/vuesax.css"; //Vuesax styles
+
 // router setup
 import routes from "./routes/routes";
 
@@ -16,6 +19,7 @@ import Notifications from "./components/NotificationPlugin";
 import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
+import './registerServiceWorker'
 
 // configure router
 const router = new VueRouter({
@@ -30,6 +34,7 @@ Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
+Vue.use(Vuesax);
 
 /* eslint-disable no-new */
 new Vue({
