@@ -3,6 +3,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App";
+import axios from "axios";
+import IncidenciaHub from "./incidencia-hub";
+
+// Setup axios as the Vue default $http library
+axios.defaults.baseURL = "https://localhost:44341"; // same as the Url the server listens to
+Vue.prototype.$http = axios;
 
 import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css"; //Vuesax styles
@@ -19,7 +25,7 @@ import Notifications from "./components/NotificationPlugin";
 import MaterialDashboard from "./material-dashboard";
 
 import Chartist from "chartist";
-import './registerServiceWorker'
+import "./registerServiceWorker";
 
 // configure router
 const router = new VueRouter({
@@ -29,6 +35,7 @@ const router = new VueRouter({
 
 Vue.prototype.$Chartist = Chartist;
 
+Vue.use(IncidenciaHub);
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);

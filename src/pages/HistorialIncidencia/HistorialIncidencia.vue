@@ -11,18 +11,13 @@
             <div class="md-layout">
               <vs-list>
                 <vs-list-item
+                  v-for="(incidencia, index) in incidenciasActivas"
+                  :key="index"
                   icon="check"
-                  title="Problema en calculo de horas extras"
-                  subtitle="Las horas extras registradas en el sistema no coinciden con el total de mes"
+                  :title="incidencia.titulo"
+                  :subtitle="incidencia.descripcion"
                 >
                   <vs-button color="success" to="incidencia/1">Ver</vs-button>
-                </vs-list-item>
-                <vs-list-item
-                  icon="check"
-                  title="Problema al actualizar producto"
-                  subtitle="El sistema no permite actualizar el producto despues de cerrado el inventario"
-                >
-                  <vs-button color="success" to="incidencia/2">Ver</vs-button>
                 </vs-list-item>
               </vs-list>
             </div>
@@ -55,15 +50,40 @@
 export default {
   data() {
     return {
-      chartId: "no-id"
+      chartId: "no-id",
+      incidenciasActivas: [],
+      incidenciasCerradas: []
     };
+  },
+  created() {
+    // Listen to changes coming from SignalR events
+    this.$incidenciaHub.$on("incidencia-added", this.onIncidenciaAdded);
+  },
+  mounted() {
+    this.incidenciasActivas.push({
+      titulo: "Problema en calculo de horas extras",
+      descripcion:
+        "Las horas extras registradas en el sistema no coinciden con el total de mes"
+    });
+    this.incidenciasActivas.push({
+      titulo: "Problema al actualizar producto",
+      descripcion:
+        "El sistema no permite actualizar el producto despues de cerrado el inventario"
+    });
   },
   methods: {
     initChart() {
       console.log("initChart");
+    },
+    onIncidenciaAdded(data) {
+      console.log(data.incidencia);
+      this.incidenciasActivas.push(data.incidencia);
     }
   },
-  mounted() {}
+  beforeDestroy() {
+    // Make sure to cleanup SignalR event handlers when removing the component
+    this.$incidenciaHub.$off("incidencia-added", this.onIncidenciaAdded);
+  }
 };
 </script>
 <style lang="scss" scoped>

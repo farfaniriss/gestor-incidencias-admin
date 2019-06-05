@@ -52,7 +52,7 @@
                   </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
-                  <md-button class="md-raised md-success">Publicar</md-button>
+                  <md-button class="md-raised md-success" @click="publicar">Publicar</md-button>
                 </div>
               </div>
             </md-card-content>
@@ -65,6 +65,7 @@
 <script>
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
+import incidenciaService from "@/services/incidencia.service";
 
 export default {
   components: {
@@ -102,6 +103,13 @@ export default {
   methods: {
     initChart() {
       console.log("hey");
+    },
+    async publicar() {
+      const incidencia = {
+        titulo: this.titulo,
+        descripcion: this.descripcion
+      };
+      await incidenciaService.addIncidencia(incidencia);
     }
   },
   mounted() {}
