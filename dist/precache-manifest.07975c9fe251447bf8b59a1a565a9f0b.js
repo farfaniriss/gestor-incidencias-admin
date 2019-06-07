@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/robots.txt"
   },
   {
-    "revision": "62d195644f60b66612ac",
-    "url": "/js/chunk-vendors.e99a2d78.js"
+    "revision": "a13cb97db04ea85e7cab",
+    "url": "/js/chunk-vendors.d213d009.js"
   },
   {
-    "revision": "b6a334607dad166bfcee",
-    "url": "/js/app.b8e2bf60.js"
+    "revision": "c064b0e20b423d113833",
+    "url": "/js/app.b0bf2e01.js"
   },
   {
-    "revision": "92bcad52452d258ae0c293d94dc0a1b8",
+    "revision": "3d77fe63ffa65ff1f52dc3aefe6bbcb4",
     "url": "/index.html"
   },
   {
@@ -24,15 +24,19 @@ self.__precacheManifest = [
     "url": "/img/marc.aba54d65.jpg"
   },
   {
+    "revision": "17191693030787fd73c666aa918b2c6a",
+    "url": "/firebase-messaging-sw.js"
+  },
+  {
     "revision": "996d8248f580f8e26e6c45c67da9b5a6",
     "url": "/favicon.png"
   },
   {
-    "revision": "62d195644f60b66612ac",
+    "revision": "a13cb97db04ea85e7cab",
     "url": "/css/chunk-vendors.49e4769c.css"
   },
   {
-    "revision": "b6a334607dad166bfcee",
+    "revision": "c064b0e20b423d113833",
     "url": "/css/app.1b5cbe0c.css"
   }
 ];

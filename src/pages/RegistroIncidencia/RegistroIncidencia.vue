@@ -107,12 +107,13 @@ export default {
     async publicar() {
       const incidencia = {
         titulo: this.titulo,
-        descripcion: this.descripcion
+        descripcion: this.descripcion,
+        token: this.$messagingToken
       };
       await incidenciaService.addIncidencia(incidencia);
-    }
-  },
-  mounted() {}
+    },
+    mounted() {}
+  }
 };
 </script>
 <style lang="scss" scoped>
