@@ -1,28 +1,62 @@
 <template>
   <div>
-    <md-list-item>
-      <slot>
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
-      </slot>
+    <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
+      <router-link to="/dashboard" class="menu-router-link">
+        <md-icon>dashboard</md-icon>Dashboard
+      </router-link>
     </md-list-item>
-    <md-list-item md-expand>
-      <md-icon>content_paste</md-icon>
-      <p>Incidencias</p>
+    <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
+      <md-icon>apps</md-icon>
+      <p class="white-text">Soporte</p>
       <md-list slot="md-expand">
-        <router-link to="/registro" class="md-inset pl-2 item-text">
-          <md-list-item>Registro</md-list-item>
-        </router-link>
-        <router-link to="/historial" class="md-inset pl-2 item-text">
-          <md-list-item>Historial</md-list-item>
-        </router-link>
+        <md-list-item @click="hideSidebar">
+          <router-link to="/registro" :class="{'pl-2': !showIcons}">
+            <md-icon>bug_report</md-icon>Ticket
+          </router-link>
+        </md-list-item>
+        <md-list-item @click="hideSidebar">
+          <router-link to="/historial" :class="{'pl-2': !showIcons}">
+            <md-icon>assignment</md-icon>Historial
+          </router-link>
+        </md-list-item>
+        <md-list-item @click="hideSidebar">
+          <router-link to="/historial" :class="{'pl-2': !showIcons}">
+            <md-icon>work</md-icon>Base de conocimiento
+          </router-link>
+        </md-list-item>
       </md-list>
     </md-list-item>
-    <md-list-item>
-      <md-icon>person</md-icon>
-      <p>
-        <router-link to="/user">Perfil</router-link>
-      </p>
+    <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
+      <md-icon>settings</md-icon>
+      <p class="white-text">Configuración</p>
+      <md-list slot="md-expand">
+        <md-list-item @click="hideSidebar">
+          <router-link to="/registro" :class="{'pl-2': !showIcons}">
+            <md-icon>storage</md-icon>Tablas
+          </router-link>
+        </md-list-item>
+      </md-list>
+    </md-list-item>
+    <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
+      <md-icon>supervisor_account</md-icon>
+      <p class="white-text">Administración</p>
+      <md-list slot="md-expand">
+        <md-list-item @click="hideSidebar">
+          <router-link to="/registro" :class="{'pl-2': !showIcons}">
+            <md-icon>person_add</md-icon>Usuarios
+          </router-link>
+        </md-list-item>
+        <md-list-item @click="hideSidebar">
+          <router-link to="/registro" :class="{'pl-2': !showIcons}">
+            <md-icon>group_add</md-icon>Empresa
+          </router-link>
+        </md-list-item>
+      </md-list>
+    </md-list-item>
+    <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
+      <router-link to="/user" class="menu-router-link">
+        <md-icon>person</md-icon>Perfil
+      </router-link>
     </md-list-item>
   </div>
 </template>
@@ -34,24 +68,9 @@ export default {
     }
   },
   props: {
-    link: {
-      type: [String, Object],
-      default: () => {
-        return {
-          name: "",
-          path: "",
-          icon: "",
-          sublink: {
-            name: "",
-            path: "",
-            icon: ""
-          }
-        };
-      }
-    },
-    tag: {
-      type: String,
-      default: "router-link"
+    showIcons: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -69,10 +88,29 @@ export default {
 </script>
 <style>
 .pl-2 {
-  padding-left: 1.5rem;
+  padding-left: 1.5rem !important;
 }
 
 .md-list-item-container {
   font-size: 14px !important;
+}
+
+.menu-router-link {
+  margin: 0;
+  line-height: 30px;
+  font-size: 14px;
+  position: relative;
+  display: block;
+  height: auto;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.white-text {
+  color: white !important;
+}
+
+.hidden-text-menu {
+  width: 20% !important;
 }
 </style>

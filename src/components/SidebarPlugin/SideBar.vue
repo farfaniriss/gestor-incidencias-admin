@@ -6,24 +6,18 @@
     :style="sidebarStyle"
   >
     <div class="logo">
-      <a href="#" class="simple-text logo-mini">
+      <a href="#" :class="[showIcons ? 'ml-1' : 'ml-6','simple-text logo-mini']">
         <div class="logo-img">
           <img :src="imgLogo" alt>
         </div>
       </a>
-      <a href="#/user" target="_blank" class="simple-text logo-normal">{{ title }}</a>
     </div>
     <div class="sidebar-wrapper">
       <slot name="content"></slot>
       <md-list class="nav" :md-expand-single="expandSingle">
         <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
         <slot>
-          <sidebar-link
-            v-for="(link, index) in sidebarLinks"
-            :key="link.name + index"
-            :to="link.path"
-            :link="link"
-          ></sidebar-link>
+          <sidebar-link></sidebar-link>
         </slot>
       </md-list>
     </div>
@@ -39,7 +33,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Jhon Doe"
+      default: ""
     },
     backgroundImage: {
       type: String,
@@ -47,7 +41,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: "https://randomuser.me/api/portraits/men/85.jpg"
+      default: "https://i.imgur.com/cPiYnQZb.png"
     },
     activeColor: {
       type: String,
@@ -64,6 +58,9 @@ export default {
     autoClose: {
       type: Boolean,
       default: true
+    },
+    showIcons: {
+      type: Boolean
     }
   },
   data() {
@@ -79,7 +76,7 @@ export default {
   computed: {
     sidebarStyle() {
       return {
-        backgroundImage: `url(${this.backgroundImage})`
+        backgroundColor: `#434C52`
       };
     }
   }
@@ -89,6 +86,14 @@ export default {
 @media screen and (min-width: 991px) {
   .nav-mobile-menu {
     display: none;
+  }
+
+  .ml-6 {
+    margin-left: 6rem !important;
+  }
+
+  .ml-1 {
+    margin-left: 0.3rem !important;
   }
 }
 </style>

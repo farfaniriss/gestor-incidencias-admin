@@ -9,7 +9,7 @@ import * as firebase from "firebase/app";
 import "firebase/messaging";
 
 // Setup axios as the Vue default $http library
-axios.defaults.baseURL = "https://localhost:44380"; // same as the Url the server listens to
+axios.defaults.baseURL = "https://localhost:44341"; // same as the Url the server listens to
 Vue.prototype.$http = axios;
 
 var firebaseConfig = {

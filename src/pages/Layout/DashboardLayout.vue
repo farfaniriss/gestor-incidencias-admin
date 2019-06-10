@@ -2,52 +2,53 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
 
-    <side-bar>
+    <side-bar :class="{'only-icons' : showIcons}" :showIcons="showIcons">
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
-      </sidebar-link>
-      <!-- <sidebar-link to="/user">
-        <md-icon>person</md-icon>
-        <p>User Profile</p>
-      </sidebar-link>
-      <sidebar-link to="/table">
-        <md-icon>content_paste</md-icon>
-        <p>Table list</p>
-      </sidebar-link>
-      <sidebar-link to="/typography">
-        <md-icon>library_books</md-icon>
-        <p>Typography</p>
-      </sidebar-link>
-      <sidebar-link to="/icons">
-        <md-icon>bubble_chart</md-icon>
-        <p>Icons</p>
-      </sidebar-link>
-      <sidebar-link to="/maps">
-        <md-icon>location_on</md-icon>
-        <p>Maps</p>
-      </sidebar-link>
-      <sidebar-link to="/notifications">
-        <md-icon>notifications</md-icon>
-        <p>Notifications</p>
-      </sidebar-link>
-      <sidebar-link to="/upgrade" class="active-pro">
-        <md-icon>unarchive</md-icon>
-        <p>Upgrade to PRO</p>
-      </sidebar-link>-->
+      <sidebar-link :showIcons="showIcons"></sidebar-link>
     </side-bar>
+    <div :class="[showIcons ? 'toggle-min' : 'toggle-max']" @click="showIcons=!showIcons">
+      <md-speed-dial id="togglebutton" :class="[showIcons ? 'ml-1' : 'ml-6']">
+        <md-speed-dial-target class="padding-zero">
+          <md-icon v-if="showIcons">keyboard_arrow_right</md-icon>
+          <md-icon v-else>keyboard_arrow_left</md-icon>
+        </md-speed-dial-target>
+      </md-speed-dial>
+    </div>
 
     <div class="main-panel">
       <top-navbar></top-navbar>
-
       <dashboard-content></dashboard-content>
 
       <!-- <content-footer v-if="!$route.meta.hideFooter"></content-footer> -->
     </div>
   </div>
 </template>
-<style lang="scss"></style>
+<style lang="scss">
+.only-icons {
+  width: 60px !important;
+}
+
+.padding-zero {
+  padding: 0px !important;
+}
+
+.toggle-min {
+  padding-left: 4rem !important;
+  position: absolute;
+  z-index: 10;
+}
+
+.toggle-max {
+  padding-left: 9rem !important;
+  position: absolute;
+  z-index: 10;
+}
+
+.md-button:not(.md-just-icon):not(.md-btn-fab):not(.md-icon-button):not(.md-toolbar-toggle)
+  .md-ripple {
+  padding: 0px !important;
+}
+</style>
 <script>
 import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
@@ -60,6 +61,11 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu
+  },
+  data() {
+    return {
+      showIcons: false
+    };
   }
 };
 </script>
