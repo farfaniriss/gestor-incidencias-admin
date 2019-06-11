@@ -6,24 +6,32 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link :showIcons="showIcons"></sidebar-link>
     </side-bar>
-    <div :class="[showIcons ? 'toggle-min' : 'toggle-max']" @click="showIcons=!showIcons">
-      <md-speed-dial id="togglebutton" :class="[showIcons ? 'ml-1' : 'ml-6']">
+    <div
+      id="togglebutton"
+      :class="[showIcons ? 'toggle-min' : 'toggle-max']"
+      @click="showIcons=!showIcons"
+    >
+      <md-speed-dial :class="[showIcons ? 'ml-1' : 'ml-6']">
         <md-speed-dial-target class="padding-zero">
-          <md-icon v-if="showIcons">keyboard_arrow_right</md-icon>
-          <md-icon v-else>keyboard_arrow_left</md-icon>
+          <i class="fas fa-bars"></i>
         </md-speed-dial-target>
       </md-speed-dial>
     </div>
 
-    <div class="main-panel">
+    <div :class="[showIcons ? 'main-panel main-panel-larger' : 'main-panel']">
       <top-navbar></top-navbar>
-      <dashboard-content></dashboard-content>
-
+      <div style="margin-top: 100px !important">
+        <dashboard-content></dashboard-content>
+      </div>
       <!-- <content-footer v-if="!$route.meta.hideFooter"></content-footer> -->
     </div>
   </div>
 </template>
 <style lang="scss">
+.main-panel-larger {
+  width: calc(100% - 60px) !important;
+}
+
 .only-icons {
   width: 60px !important;
 }
@@ -33,20 +41,26 @@
 }
 
 .toggle-min {
-  padding-left: 4rem !important;
-  position: absolute;
+  padding-left: 4.4rem !important;
+  position: fixed;
   z-index: 10;
 }
 
 .toggle-max {
   padding-left: 9rem !important;
-  position: absolute;
+  position: fixed;
   z-index: 10;
 }
 
 .md-button:not(.md-just-icon):not(.md-btn-fab):not(.md-icon-button):not(.md-toolbar-toggle)
   .md-ripple {
   padding: 0px !important;
+}
+
+@media screen and (max-width: 991px) {
+  #togglebutton {
+    display: none;
+  }
 }
 </style>
 <script>

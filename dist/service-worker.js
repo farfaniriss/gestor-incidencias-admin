@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5ada3e56b7dbb03f2ed0d75d217b2b64.js"
+  "/precache-manifest.c82cc3d8a50b86640b960939f24f059b.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue-material-dashboard"});

@@ -24,7 +24,7 @@ const routes = [
         component: Dashboard
       },
       {
-        path: "user",
+        path: "administracion/usuario",
         name: "Perfil de usuario",
         component: UserProfile
       },
@@ -60,6 +60,11 @@ const routes = [
         path: "upgrade",
         name: "Upgrade to PRO",
         component: UpgradeToPRO
+      },
+      {
+        path: "configuracion/tablas",
+        name: "Registro de incidencia",
+        component: RegistroIncidencia
       },
       {
         path: "registro",

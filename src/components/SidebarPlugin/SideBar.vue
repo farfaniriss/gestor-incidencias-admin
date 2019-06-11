@@ -14,12 +14,10 @@
     </div>
     <div class="sidebar-wrapper">
       <slot name="content"></slot>
-      <md-list class="nav" :md-expand-single="expandSingle">
-        <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
-        <slot>
-          <sidebar-link></sidebar-link>
-        </slot>
-      </md-list>
+      <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
+      <slot>
+        <sidebar-link></sidebar-link>
+      </slot>
     </div>
   </div>
 </template>
@@ -41,7 +39,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: "https://i.imgur.com/cPiYnQZb.png"
+      default: "https://i.imgur.com/AF80OFd.png"
     },
     activeColor: {
       type: String,
@@ -76,7 +74,7 @@ export default {
   computed: {
     sidebarStyle() {
       return {
-        backgroundColor: `#434C52`
+        backgroundColor: `#4F7289`
       };
     }
   }
@@ -89,11 +87,11 @@ export default {
   }
 
   .ml-6 {
-    margin-left: 6rem !important;
+    margin-left: 3.5rem !important;
   }
 
   .ml-1 {
-    margin-left: 0.3rem !important;
+    margin-left: -1.3rem !important;
   }
 }
 </style>

@@ -2,6 +2,8 @@
   min-height: 56px;
   padding: 10px 15px;
   border-radius: 3px;
+  position: fixed !important;
+  width: 100% !important;
 
   &.md-transparent {
     background-color: transparent !important;
@@ -122,6 +124,7 @@
     min-height: auto;
     padding-left: 15px;
     padding-right: 15px;
+    width: calc(97vw - 220px) !important;
   }
 
   .md-button {
@@ -155,7 +158,7 @@
   &.md-theme-default,
   &.md-theme-default .md-title,
   &.md-theme-default.md-transparent .md-title {
-    color: $gray;
+    color: $white-color;
   }
 
   .md-title {

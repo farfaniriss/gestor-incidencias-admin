@@ -65,7 +65,7 @@
     position: relative;
     height: calc(100vh - 75px);
     overflow: auto;
-    width: 260px;
+    width: 220px;
     z-index: 4;
 
     .dropdown .dropdown-backdrop {
@@ -179,17 +179,17 @@
     padding: $padding-base 0;
     z-index: 4;
 
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      top: 6rem;
-      right: 15px;
-      height: 1px;
-      width: calc(100% - 30px);
-      background-color: rgba(180, 180, 180, .3);
+    // &:after {
+    //   content: '';
+    //   position: absolute;
+    //   bottom: 0;
+    //   top: 6rem;
+    //   right: 15px;
+    //   height: 1px;
+    //   width: calc(100% - 30px);
+    //   background-color: rgba(180, 180, 180, .3);
 
-    }
+    // }
 
     p {
       float: left;
@@ -225,9 +225,9 @@
       }
 
       .logo-img {
-        width: 50px;
+        width: 100px;
         display: inline-block;
-        height: 50px;
+        height: 100px;
         background: transparent;
         border-radius: 50%;
         text-align: center;

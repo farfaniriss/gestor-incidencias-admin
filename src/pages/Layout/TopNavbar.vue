@@ -1,18 +1,16 @@
 <template>
-  <md-toolbar md-elevation="0" class="md-transparent">
+  <md-toolbar>
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
         <h3 class="md-title">{{ $route.name }}</h3>
       </div>
-      <div class="md-toolbar-section-end">
+      <div class="md-toolbar-section-end fixed-breadcrumb">
         <md-button
           class="md-just-icon md-simple md-toolbar-toggle"
           :class="{ toggled: $sidebar.showSidebar }"
           @click="toggleSidebar"
         >
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <i class="fas fa-bars" style="color: white !important; width: 100%"></i>
         </md-button>
 
         <div class="md-collapse">
@@ -22,11 +20,6 @@
             </md-autocomplete>
           </div>-->
           <md-list>
-            <!-- <md-list-item href="#/">
-              <i class="material-icons">dashboard</i>
-              <p class="hidden-lg hidden-md">Dashboard</p>
-            </md-list-item>-->
-
             <md-list-item href="#/" class="dropdown">
               <drop-down>
                 <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
@@ -45,7 +38,7 @@
               </drop-down>
             </md-list-item>
 
-            <md-list-item href="#/user">
+            <md-list-item href="#/administracion/usuario">
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Perfil</p>
             </md-list-item>
@@ -81,4 +74,16 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+.fixed-breadcrumb {
+  position: inherit;
+  margin-left: 0px;
+}
+
+@media screen and (max-width: 991px) {
+  .fixed-breadcrumb {
+    position: fixed;
+    margin-left: 320px;
+  }
+}
+</style>

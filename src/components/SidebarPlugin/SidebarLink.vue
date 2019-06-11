@@ -1,11 +1,12 @@
 <template>
   <div>
-    <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
-      <router-link to="/dashboard" class="menu-router-link">
-        <md-icon>dashboard</md-icon>Dashboard
-      </router-link>
-    </md-list-item>
-    <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
+    <md-list class="nav" md-expand-single="true">
+      <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
+        <router-link to="/dashboard" class="menu-router-link">
+          <md-icon>dashboard</md-icon>Dashboard
+        </router-link>
+      </md-list-item>
+      <!-- <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
       <md-icon>apps</md-icon>
       <p class="white-text">Soporte</p>
       <md-list slot="md-expand">
@@ -25,39 +26,45 @@
           </router-link>
         </md-list-item>
       </md-list>
-    </md-list-item>
-    <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
-      <md-icon>settings</md-icon>
-      <p class="white-text">Configuración</p>
-      <md-list slot="md-expand">
-        <md-list-item @click="hideSidebar">
-          <router-link to="/registro" :class="{'pl-2': !showIcons}">
-            <md-icon>storage</md-icon>Tablas
-          </router-link>
-        </md-list-item>
-      </md-list>
-    </md-list-item>
-    <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
-      <md-icon>supervisor_account</md-icon>
-      <p class="white-text">Administración</p>
-      <md-list slot="md-expand">
-        <md-list-item @click="hideSidebar">
-          <router-link to="/registro" :class="{'pl-2': !showIcons}">
-            <md-icon>person_add</md-icon>Usuarios
-          </router-link>
-        </md-list-item>
-        <md-list-item @click="hideSidebar">
-          <router-link to="/registro" :class="{'pl-2': !showIcons}">
-            <md-icon>group_add</md-icon>Empresa
-          </router-link>
-        </md-list-item>
-      </md-list>
-    </md-list-item>
-    <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
-      <router-link to="/user" class="menu-router-link">
-        <md-icon>person</md-icon>Perfil
-      </router-link>
-    </md-list-item>
+      </md-list-item>-->
+      <md-list-item
+        md-expand
+        :md-expanded.sync="expandConfig"
+        :class="{'hidden-text-menu': showIcons}"
+        @click="expandAdmin = false"
+      >
+        <md-icon>settings</md-icon>
+        <p class="white-text">Configuración</p>
+        <md-list slot="md-expand">
+          <md-list-item @click="hideSidebar">
+            <router-link to="/configuracion/tablas" :class="{'pl-2': !showIcons}">
+              <md-icon>storage</md-icon>Tablas
+            </router-link>
+          </md-list-item>
+        </md-list>
+      </md-list-item>
+      <md-list-item
+        md-expand
+        :class="{'hidden-text-menu': showIcons}"
+        :md-expanded.sync="expandAdmin"
+        @click="expandConfig = false"
+      >
+        <md-icon>supervisor_account</md-icon>
+        <p class="white-text">Administración</p>
+        <md-list slot="md-expand">
+          <md-list-item @click="hideSidebar">
+            <router-link to="/administracion/usuario" :class="{'pl-2': !showIcons}">
+              <md-icon>person_add</md-icon>Usuarios
+            </router-link>
+          </md-list-item>
+          <md-list-item @click="hideSidebar">
+            <router-link to="/administracion/usuario" :class="{'pl-2': !showIcons}">
+              <md-icon>group_add</md-icon>Empresa
+            </router-link>
+          </md-list-item>
+        </md-list>
+      </md-list-item>
+    </md-list>
   </div>
 </template>
 <script>
@@ -72,6 +79,13 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data() {
+    return {
+      expandSingle: true,
+      expandConfig: false,
+      expandAdmin: false
+    };
   },
   methods: {
     hideSidebar() {
@@ -112,5 +126,10 @@ export default {
 
 .hidden-text-menu {
   width: 20% !important;
+}
+
+.md-icon.md-theme-default.md-icon-image svg {
+  fill: white !important;
+  /* fill: var(--md-theme-default-icon-on-background, rgba(0, 0, 0, 0.54)); */
 }
 </style>
