@@ -2,31 +2,10 @@
   <div>
     <md-list class="nav" md-expand-single="true">
       <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
-        <router-link to="/dashboard" class="menu-router-link">
-          <md-icon>dashboard</md-icon>Dashboard
+        <router-link to="/inicio" class="menu-router-link">
+          <md-icon>dashboard</md-icon>Inicio
         </router-link>
       </md-list-item>
-      <!-- <md-list-item md-expand :class="{'hidden-text-menu': showIcons}">
-      <md-icon>apps</md-icon>
-      <p class="white-text">Soporte</p>
-      <md-list slot="md-expand">
-        <md-list-item @click="hideSidebar">
-          <router-link to="/registro" :class="{'pl-2': !showIcons}">
-            <md-icon>bug_report</md-icon>Ticket
-          </router-link>
-        </md-list-item>
-        <md-list-item @click="hideSidebar">
-          <router-link to="/historial" :class="{'pl-2': !showIcons}">
-            <md-icon>assignment</md-icon>Historial
-          </router-link>
-        </md-list-item>
-        <md-list-item @click="hideSidebar">
-          <router-link to="/historial" :class="{'pl-2': !showIcons}">
-            <md-icon>work</md-icon>Base de conocimiento
-          </router-link>
-        </md-list-item>
-      </md-list>
-      </md-list-item>-->
       <md-list-item
         md-expand
         :md-expanded.sync="expandConfig"
@@ -131,5 +110,9 @@ export default {
 .md-icon.md-theme-default.md-icon-image svg {
   fill: white !important;
   /* fill: var(--md-theme-default-icon-on-background, rgba(0, 0, 0, 0.54)); */
+}
+
+.md-list-expand-icon {
+  margin-left: auto !important;
 }
 </style>

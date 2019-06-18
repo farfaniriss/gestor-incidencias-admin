@@ -7,7 +7,7 @@
 .md-list-item {
   .md-list-item-container {
     .md-ripple {
-      padding: 10px 15px;
+      padding: 10px 0px 10px 15px;
       border-radius: $border-radius-base;
 
       >span {
@@ -24,7 +24,6 @@
   bottom: 0;
   left: 0;
   z-index: 1;
-  @include shadow-big();
   background-size: cover;
   background-position: center center;
   @extend .animation-transition-general;
@@ -47,7 +46,7 @@
     }
 
     .md-list-item-content {
-      justify-content: flex-start;
+      justify-content: start;
       min-height: auto;
     }
 
@@ -67,6 +66,8 @@
     overflow: auto;
     width: 220px;
     z-index: 4;
+    margin-top: -50px;
+    display: inline-block;
 
     .dropdown .dropdown-backdrop {
       display: none !important;
@@ -263,7 +264,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(27, 27, 27, 0.87);
     opacity: .85;
     top: 0;
     left: 0;

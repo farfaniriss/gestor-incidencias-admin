@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="sidebar"
-    :data-color="activeColor"
-    :data-image="backgroundImage"
-    :style="sidebarStyle"
-  >
+  <div class="sidebar" :data-color="activeColor" :style="sidebarStyle">
     <div class="logo">
       <a href="#" :class="[showIcons ? 'ml-1' : 'ml-6','simple-text logo-mini']">
         <div class="logo-img">
@@ -74,7 +69,7 @@ export default {
   computed: {
     sidebarStyle() {
       return {
-        backgroundColor: `#4F7289`
+        backgroundColor: `#434c52`
       };
     }
   }

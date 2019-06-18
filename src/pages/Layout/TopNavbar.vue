@@ -6,11 +6,11 @@
       </div>
       <div class="md-toolbar-section-end fixed-breadcrumb">
         <md-button
-          class="md-just-icon md-simple md-toolbar-toggle"
+          class="md-just-icon md-simple md-toolbar-toggle md-button-transparent"
           :class="{ toggled: $sidebar.showSidebar }"
           @click="toggleSidebar"
         >
-          <i class="fas fa-bars" style="color: white !important; width: 100%"></i>
+          <i class="fas fa-bars" style="color: #434c52 !important; width: 100%"></i>
         </md-button>
 
         <div class="md-collapse">
@@ -77,13 +77,17 @@ export default {
 <style lang="css">
 .fixed-breadcrumb {
   position: inherit;
-  margin-left: 0px;
+}
+
+.md-toolbar {
+  padding-left: 20px !important;
+  color: #434c52 !important;
 }
 
 @media screen and (max-width: 991px) {
   .fixed-breadcrumb {
     position: fixed;
-    margin-left: 320px;
+    margin-left: 270px;
   }
 }
 </style>

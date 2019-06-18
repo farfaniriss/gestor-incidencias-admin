@@ -16,16 +16,16 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
-    redirect: "/dashboard",
+    redirect: "/inicio",
     children: [
       {
-        path: "dashboard",
-        name: "Dashboard",
+        path: "inicio",
+        name: "Inicio",
         component: Dashboard
       },
       {
         path: "administracion/usuario",
-        name: "Perfil de usuario",
+        name: "Administración > Usuario",
         component: UserProfile
       },
       {
@@ -63,7 +63,7 @@ const routes = [
       },
       {
         path: "configuracion/tablas",
-        name: "Registro de incidencia",
+        name: "Configuración > Tablas",
         component: RegistroIncidencia
       },
       {

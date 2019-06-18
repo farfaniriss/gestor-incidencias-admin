@@ -41,13 +41,15 @@
 }
 
 .toggle-min {
-  padding-left: 4.4rem !important;
+  padding-top: 0.5rem !important;
+  padding-left: 4.7rem !important;
   position: fixed;
   z-index: 10;
 }
 
 .toggle-max {
-  padding-left: 9rem !important;
+  padding-top: 0.5rem !important;
+  padding-left: 10rem !important;
   position: fixed;
   z-index: 10;
 }

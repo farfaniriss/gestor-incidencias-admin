@@ -116,7 +116,7 @@
     border-bottom: 0;
 
     .logo-container .brand {
-      color: $white-color;
+      color: #434c52 !important;
     }
   }
 
@@ -158,7 +158,7 @@
   &.md-theme-default,
   &.md-theme-default .md-title,
   &.md-theme-default.md-transparent .md-title {
-    color: $white-color;
+    color: #434c52 !important;
   }
 
   .md-title {
