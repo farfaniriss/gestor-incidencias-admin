@@ -11,6 +11,9 @@ import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import RegistroIncidencia from "@/pages/RegistroIncidencia/RegistroIncidencia.vue";
 import HistorialIncidencia from "@/pages/HistorialIncidencia/HistorialIncidencia.vue";
 import SeguimientoIncidencia from "@/pages/SeguimientoIncidencia/SeguimientoIncidencia.vue";
+import RegistroEmpresa from "@/pages/Empresa/RegistroEmpresa.vue";
+import ListaEmpresa from "@/pages/Empresa/ListaEmpresa.vue";
+import RegistroPerfil from "@/pages/Perfil/RegistroPerfil.vue";
 
 const routes = [
   {
@@ -80,6 +83,21 @@ const routes = [
         path: "/incidencia/:id",
         name: "Seguimiento de incidencia",
         component: SeguimientoIncidencia
+      },
+      {
+        path: "/administracion/empresa",
+        name: "Administracion > Registro de empresa",
+        component: RegistroEmpresa
+      },
+      {
+        path: "/administracion/empresas",
+        name: "Administracion > Empresas",
+        component: ListaEmpresa
+      },
+      {
+        path: "/administracion/perfil",
+        name: "Administracion > Perfil",
+        component: RegistroPerfil
       }
     ]
   }

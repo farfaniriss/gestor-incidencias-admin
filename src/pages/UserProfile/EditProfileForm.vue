@@ -2,38 +2,57 @@
   <form>
     <md-card>
       <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Editar perfil</h4>
-        <p class="category">Complete los datos</p>
+        <h4 class="title">Registrar usuario</h4>
+        <p class="category">Complete los datos para el registro de usuario</p>
       </md-card-header>
 
       <md-card-content>
         <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-100">
-            <md-field>
-              <label>Username</label>
-              <md-input v-model="username" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
+          <div class="md-layout-item md-small-size-100 md-size-40">
             <md-field>
               <label>Nombres</label>
-              <md-input v-model="firstname" type="text"></md-input>
+              <md-input v-model="nombres" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
+          <div class="md-layout-item md-small-size-100 md-size-30">
             <md-field>
-              <label>Apellidos</label>
-              <md-input v-model="lastname" type="text"></md-input>
+              <label>Apellido paterno</label>
+              <md-input v-model="apellidoPaterno" type="text"></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-30">
+            <md-field>
+              <label>Apellido materno</label>
+              <md-input v-model="apellidoMaterno" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Email secundario</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+              <label>Email</label>
+              <md-input v-model="email" type="email"></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>DNI</label>
+              <md-input v-model="dni" type="text"></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>Perfil</label>
+              <md-input v-model="perfil" type="text"></md-input>
+            </md-field>
+          </div>
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>Empresa</label>
+              <md-input v-model="empresa" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Actualizar perfil</md-button>
+            <md-button class="md-raised md-success">Registrar</md-button>
+            <md-button class="md-raised md-danger">Cancelar</md-button>
           </div>
         </div>
       </md-card-content>
@@ -51,18 +70,12 @@ export default {
   },
   data() {
     return {
-      username: null,
-      disabled: null,
-      emailadress: null,
-      lastname: null,
-      firstname: null,
-      address: null,
-      city: null,
-      country: null,
-      code: null,
-      celular: null,
-      aboutme:
-        "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+      nombres: "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      email: "",
+      dni: "",
+      perfil: ""
     };
   }
 };
