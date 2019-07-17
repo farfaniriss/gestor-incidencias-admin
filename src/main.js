@@ -7,7 +7,7 @@ import axios from "axios";
 import IncidenciaHub from "./incidencia-hub";
 //import * as firebase from "firebase/app";
 import "firebase/messaging";
-import Vuetify from 'vuetify';
+import Vuetify from "vuetify";
 
 // Setup axios as the Vue default $http library
 axios.defaults.baseURL = "http://jaamtech-api.azurewebsites.net"; // same as the Url the server listens to
@@ -80,7 +80,14 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(Vuesax);
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  theme: {
+    primary: "#3f51b5",
+    secondary: "#b0bec5",
+    accent: "#8c9eff",
+    error: "#b71c1c"
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({
