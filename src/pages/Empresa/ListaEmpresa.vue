@@ -121,6 +121,7 @@
               :search="search"
               :filter="searchData"
               :custom-filter="filterData"
+              :rows-per-page-items="rowsPerPageItems"
             >
               <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.cRuc }}</td>
@@ -159,6 +160,7 @@ export default {
     dialog: false,
     dialogDelete: false,
     search: "",
+    rowsPerPageItems: [10, 20, 30, 40],
     headers: [
       { text: "Ruc", value: "cRuc" },
       { text: "Razon social", value: "cRazonSocial" },
@@ -181,7 +183,11 @@ export default {
       cNomContacto: "",
       cEmailContacto: "",
       cTelContacto: "",
-      cCelContacto: ""
+      cCelContacto: "",
+      usuSesion: {
+        UserId: 1,
+        Username: "jxalxi"
+      }
     },
     defaultItem: {
       cRuc: "",
@@ -191,7 +197,11 @@ export default {
       cNomContacto: "",
       cEmailContacto: "",
       cTelContacto: "",
-      cCelContacto: ""
+      cCelContacto: "",
+      usuSesion: {
+        UserId: 1,
+        Username: "jxalxi"
+      }
     },
     rucRules: [
       v => !!v || "El campo es requerido",
