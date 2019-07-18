@@ -13,99 +13,96 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialog" max-width="500px" persistent>
+          <v-card>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+            <v-card-text>
+              <v-form v-model="valid" ref="form" lazy-validation>
+                <v-container grid-list-md>
+                  <v-layout wrap>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cRuc"
+                        :rules="rucRules"
+                        label="Ruc"
+                        :counter="11"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cRazonSocial"
+                        :counter="300"
+                        :rules="razonSocialRules"
+                        label="Razón social"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cDNIContacto"
+                        label="DNI Contacto"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cNomContacto"
+                        label="Nombre Contacto"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cEmailContacto"
+                        label="Email Contacto"
+                        :rules="emailRules"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cTelContacto"
+                        label="Teléfono Contacto"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.cCelContacto"
+                        label="Celular Contacto"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-form>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                style="background-color: #3198ca !important; color: white !important"
+                @click="close"
+              >Cancel</v-btn>
+              <v-btn color="success" :disabled="!valid" @click="save">Save</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
         <v-toolbar flat color="white">
           <v-toolbar-title>Empresas</v-toolbar-title>
           <v-divider class="mx-2" style="max-height: 0px !important;" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px" persistent>
-            <template v-slot:activator="{ on }">
-              <v-btn color="info" class="mb-2" v-on="on">Nueva empresa</v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title>
-
-              <v-card-text>
-                <v-form v-model="valid" ref="form" lazy-validation>
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cRuc"
-                          :rules="rucRules"
-                          label="Ruc"
-                          :counter="11"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cRazonSocial"
-                          :counter="300"
-                          :rules="razonSocialRules"
-                          label="Razón social"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cDNIContacto"
-                          label="DNI Contacto"
-                          :rules="campoRequerido"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cNomContacto"
-                          label="Nombre Contacto"
-                          :rules="campoRequerido"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cEmailContacto"
-                          label="Email Contacto"
-                          :rules="emailRules"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cTelContacto"
-                          label="Teléfono Contacto"
-                          :rules="campoRequerido"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs12 sm12 md12>
-                        <v-text-field
-                          v-model="editedItem.cCelContacto"
-                          label="Celular Contacto"
-                          :rules="campoRequerido"
-                          required
-                        ></v-text-field>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-form>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  style="background-color: #3198ca !important; color: white !important"
-                  @click="close"
-                >Cancel</v-btn>
-                <v-btn color="success" :disabled="!valid" @click="save">Save</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+          <v-btn color="info" class="mb-2" @click.stop="dialog = true">Nueva empresa</v-btn>
         </v-toolbar>
         <div style="position: static !important;">
           <v-card>
@@ -216,11 +213,11 @@ export default {
     }
   },
 
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
+  // watch: {
+  //   dialog(val) {
+  //     val || this.close();
+  //   }
+  // },
   methods: {
     editItem(item) {
       this.editedIndex = this.empresas.indexOf(item);
@@ -229,7 +226,6 @@ export default {
     },
 
     deleteItem(item) {
-      console.log("deleteItem");
       this.dialogDelete = true;
       this.indexToDelete = this.empresas.indexOf(item);
     },
@@ -252,8 +248,20 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.editedIndex > -1) {
           Object.assign(this.empresas[this.editedIndex], this.editedItem);
+          this.$http
+            .put("/api/empresa", this.editedItem)
+            .then(res => {
+              console.log(res);
+            })
+            .catch(error => console.log(error));
         } else {
           this.empresas.push(this.editedItem);
+          this.$http
+            .post("/api/empresa", this.editedItem)
+            .then(res => {
+              console.log(res);
+            })
+            .catch(error => console.log(error));
         }
         this.close();
       }
@@ -309,12 +317,6 @@ export default {
   margin: 0px !important;
   padding-top: 6px !important;
   min-height: 30px !important;
-}
-
-.v-dialog {
-  max-height: 500px !important;
-  margin-top: 460px !important;
-  background-color: rgba(0, 0, 0, 0.5); /*dim the background*/
 }
 
 .v-toolbar {
