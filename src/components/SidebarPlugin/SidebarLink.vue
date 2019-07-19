@@ -36,16 +36,16 @@
               <md-icon>group_add</md-icon>Empresas
             </router-link>
           </md-list-item>
-          <!-- <md-list-item @click="hideSidebar">
+          <md-list-item @click="hideSidebar">
             <router-link to="/administracion/perfil" :class="{'pl-2': !showIcons}">
               <md-icon>group_add</md-icon>Perfil
             </router-link>
           </md-list-item>
           <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/usuario" :class="{'pl-2': !showIcons}">
+            <router-link to="/administracion/usuarios" :class="{'pl-2': !showIcons}">
               <md-icon>person_add</md-icon>Usuario
             </router-link>
-          </md-list-item>-->
+          </md-list-item>
         </md-list>
       </md-list-item>
     </md-list>

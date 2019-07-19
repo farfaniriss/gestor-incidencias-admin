@@ -20,7 +20,7 @@
 
     <div :class="[showIcons ? 'main-panel main-panel-larger' : 'main-panel']">
       <top-navbar></top-navbar>
-      <div style="margin-top: 100px !important">
+      <div style="margin-top: 100px; margin-left: 10px; margin-right: 10px;">
         <dashboard-content></dashboard-content>
       </div>
       <!-- <content-footer v-if="!$route.meta.hideFooter"></content-footer> -->

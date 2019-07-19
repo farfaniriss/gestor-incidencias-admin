@@ -35,8 +35,8 @@ export default {
       });
       return startedPromise;
     }
-    connection.onclose(() => start());
+    // connection.onclose(() => start());
 
-    start();
+    // start();
   }
 };

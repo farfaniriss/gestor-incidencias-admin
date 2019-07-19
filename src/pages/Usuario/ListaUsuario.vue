@@ -24,56 +24,55 @@
                   <v-layout wrap>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cRuc"
-                        :rules="rucRules"
+                        v-model="editedItem.cDNI"
+                        :rules="dniRules"
                         type="number"
                         class="inputNumber"
-                        label="Ruc"
-                        :counter="11"
+                        label="DNI"
+                        :counter="8"
                         required
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cRazonSocial"
-                        :counter="300"
-                        :rules="razonSocialRules"
-                        label="Razón social"
+                        v-model="editedItem.cNombre"
+                        :rules="campoRequerido"
+                        label="Nombres"
                         required
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm12 md12>
+                    <v-flex xs12 sm12 md6>
                       <v-text-field
-                        v-model="editedItem.cDNIContacto"
-                        label="DNI Contacto"
+                        v-model="editedItem.cApePaterno"
+                        label="Apellido paterno"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md6>
+                      <v-text-field
+                        v-model="editedItem.cApeMaterno"
+                        label="Apellido materno"
                         :rules="campoRequerido"
                         required
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cNomContacto"
-                        label="Nombre Contacto"
+                        v-model="editedItem.dFecNacimiento"
+                        label="Fecha nacimiento"
                         :rules="campoRequerido"
                         required
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cEmailContacto"
-                        label="Email Contacto"
+                        v-model="editedItem.cEmail"
+                        label="Email"
                         :rules="emailRules"
-                        required
-                      ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm12 md12>
-                      <v-text-field
-                        v-model="editedItem.cTelContacto"
-                        label="Teléfono Contacto"
-                        :rules="campoRequerido"
                         required
                       ></v-text-field>
                     </v-flex>
@@ -81,6 +80,22 @@
                       <v-text-field
                         v-model="editedItem.cCelContacto"
                         label="Celular Contacto"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.nIdCargo"
+                        label="Cargo"
+                        :rules="campoRequerido"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field
+                        v-model="editedItem.nIdsucursal"
+                        label="Sucursal"
                         :rules="campoRequerido"
                         required
                       ></v-text-field>
@@ -101,25 +116,79 @@
           </v-card>
         </v-dialog>
         <v-toolbar flat color="white">
-          <v-toolbar-title>Empresas</v-toolbar-title>
+          <v-toolbar-title>Usuarios</v-toolbar-title>
           <v-divider class="mx-2" style="max-height: 0px !important;" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-btn color="info" class="mb-2" @click.stop="dialog = true">Nueva empresa</v-btn>
+          <v-btn color="info" class="mb-2" @click.stop="dialog = true">Nuevo usuario</v-btn>
         </v-toolbar>
         <div style="position: static !important;">
           <v-card>
+            <v-container grid-list-md text-xs-center>
+              <v-layout row wrap justify-space-between>
+                <v-flex xs12 sm3>
+                  <v-combobox
+                    v-model="empresa"
+                    item-text="cRazonSocial"
+                    item-value="nIdEmpresa"
+                    :items="empresas"
+                    label="Empresa"
+                    return-object
+                  ></v-combobox>
+                </v-flex>
+                <v-flex xs12 sm2>
+                  <v-combobox
+                    v-model="empresa"
+                    item-text="cRazonSocial"
+                    item-value="nIdEmpresa"
+                    :items="empresas"
+                    label="Unidad Operativa"
+                    return-object
+                  ></v-combobox>
+                </v-flex>
+                <v-flex xs12 sm2>
+                  <v-combobox
+                    v-model="empresa"
+                    item-text="cRazonSocial"
+                    item-value="nIdEmpresa"
+                    :items="empresas"
+                    label="Sucursal"
+                    return-object
+                  ></v-combobox>
+                </v-flex>
+                <v-flex xs12 sm2>
+                  <v-combobox
+                    v-model="empresa"
+                    item-text="cRazonSocial"
+                    item-value="nIdEmpresa"
+                    :items="empresas"
+                    label="Área"
+                    return-object
+                  ></v-combobox>
+                </v-flex>
+                <v-flex xs12 sm2>
+                  <v-combobox
+                    v-model="empresa"
+                    item-text="cRazonSocial"
+                    item-value="nIdEmpresa"
+                    :items="empresas"
+                    label="Cargo"
+                    return-object
+                  ></v-combobox>
+                </v-flex>
+              </v-layout>
+            </v-container>
             <v-card-title>
               <v-text-field
                 v-model="search"
                 append-icon="search"
-                label="Buscar por RUC / Razón social"
+                label="Buscar por DNI / Nombre"
                 single-line
                 hide-details
               ></v-text-field>
             </v-card-title>
             <v-data-table
               :headers="headers"
-              :items="empresas"
+              :items="usuarios"
               :search="search"
               :filter="searchData"
               :custom-filter="filterData"
@@ -128,14 +197,15 @@
               rows-per-page-text="Filas por página"
             >
               <template v-slot:items="props">
-                <td class="text-xs-left">{{ props.item.cRuc }}</td>
-                <td class="text-xs-left">{{ props.item.cRazonSocial }}</td>
-                <td class="text-xs-left">{{ props.item.cPaginaWeb }}</td>
-                <td class="text-xs-left">{{ props.item.cDNIContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cNomContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cEmailContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cTelContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cCelContacto }}</td>
+                <td class="text-xs-left">{{ props.item.cDNI }}</td>
+                <td class="text-xs-left">{{ props.item.cCodUsu }}</td>
+                <td class="text-xs-left">{{ props.item.cNombre }}</td>
+                <td class="text-xs-left">{{ props.item.cApePaterno }}</td>
+                <td class="text-xs-left">{{ props.item.cApeMaterno }}</td>
+                <td class="text-xs-left">{{ props.item.dFecNacimiento }}</td>
+                <td class="text-xs-left">{{ props.item.cEmail }}</td>
+                <td class="text-xs-left">{{ props.item.cCelular }}</td>
+                <td class="text-xs-left">{{ props.item.nIdEmpresa }}</td>
                 <td class="justify-start layout">
                   <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
                   <v-icon small @click.stop="deleteItem(props.item)">delete</v-icon>
@@ -166,57 +236,59 @@ export default {
     search: "",
     rowsPerPageItems: [10, 20, 30, 40],
     headers: [
-      { text: "Ruc", value: "cRuc" },
-      { text: "Razon social", value: "cRazonSocial" },
-      { text: "Pagina web", value: "cPaginaWeb" },
-      { text: "DNI Contacto", value: "cDNIContacto" },
-      { text: "Nombre Contacto", value: "cNomContacto" },
-      { text: "Email Contacto", value: "cEmailContacto" },
-      { text: "Teléfono Contacto", value: "cTelContacto" },
-      { text: "Celular Contacto", value: "cCelContacto" },
-      { text: "Acciones", value: "cRuc", sortable: false }
+      { text: "DNI", value: "cDNI" },
+      { text: "Username", value: "cCodUsu" },
+      { text: "Nombre", value: "cNombre" },
+      { text: "Apellido paterno", value: "cApePaterno" },
+      { text: "Apellido materno", value: "cApeMaterno" },
+      { text: "Fecha de nacimiento", value: "dFecNacimiento" },
+      { text: "Email", value: "cEmail" },
+      { text: "Celular", value: "cCelular" },
+      { text: "Empresa", value: "nIdEmpresa" },
+      { text: "Acciones", value: "cDNI", sortable: false }
     ],
+    usuarios: [],
     empresas: [],
     editedIndex: -1,
     indexToDelete: -1,
     editedItem: {
-      nIdEmpresa: 0,
-      cRuc: "",
-      cRazonSocial: "",
-      cPaginaWeb: "",
-      cDNIContacto: "",
-      cNomContacto: "",
-      cEmailContacto: "",
-      cTelContacto: "",
-      cCelContacto: "",
+      nIdUsuario: 0,
+      cDNI: "",
+      cNombre: "",
+      cApePaterno: "",
+      cApeMaterno: "",
+      dFecNacimiento: "",
+      cEmail: "",
+      cCelular: "",
+      nIdsucursal: "",
       usuSesion: {
         UserId: 1,
         Username: "jxalxi"
       }
     },
     defaultItem: {
-      nIdEmpresa: 0,
-      cRuc: "",
-      cRazonSocial: "",
-      cPaginaWeb: "",
-      cDNIContacto: "",
-      cNomContacto: "",
-      cEmailContacto: "",
-      cTelContacto: "",
-      cCelContacto: "",
+      nIdUsuario: 0,
+      cDNI: "",
+      cNombre: "",
+      cApePaterno: "",
+      cApeMaterno: "",
+      dFecNacimiento: "",
+      cEmail: "",
+      cCelular: "",
+      nIdsucursal: "",
       usuSesion: {
         UserId: 1,
         Username: "jxalxi"
       }
     },
-    rucRules: [
+    empresa: {
+      nIdEmpresa: -1,
+      cRazonSocial: ""
+    },
+    dniRules: [
       v => !!v || "El campo es requerido",
-      v => v.length <= 11 || "RUC no debe tener más de 11 caracteres",
-      v => /^\d*$/.test(v) || "RUC sólo puede contener números"
-    ],
-    razonSocialRules: [
-      v => !!v || "El campo es requerido",
-      v => v.length <= 300 || "Razón social no debe tener más de 300 caracteres"
+      v => v.length <= 8 || "DNI no debe tener más de 8 caracteres",
+      v => /^\d*$/.test(v) || "DNI sólo puede contener números"
     ],
     emailRules: [
       v => !!v || "El campo es requerido",
@@ -226,32 +298,26 @@ export default {
   }),
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nueva empresa" : "Editar empresa";
+      return this.editedIndex === -1 ? "Nuevo usuario" : "Editar usuario";
     }
   },
-
-  // watch: {
-  //   dialog(val) {
-  //     val || this.close();
-  //   }
-  // },
   methods: {
     editItem(item) {
-      this.editedIndex = this.empresas.indexOf(item);
+      this.editedIndex = this.usuarios.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
       this.dialogDelete = true;
-      this.indexToDelete = this.empresas.indexOf(item);
+      this.indexToDelete = this.usuarios.indexOf(item);
     },
 
     confirmDelete() {
-      this.empresas.splice(this.indexToDelete, 1);
-      let nIdEmpresa = this.empresas[this.indexToDelete].nIdEmpresa;
+      this.usuarios.splice(this.indexToDelete, 1);
+      let nIdUsuario = this.usuarios[this.indexToDelete].nIdUsuario;
       this.$http
-        .delete(`/api/empresa/${nIdEmpresa}`)
+        .delete(`/api/usuario/${nIdUsuario}`)
         .then(res => {
           console.log(res);
         })
@@ -271,9 +337,9 @@ export default {
     save() {
       if (this.$refs.form.validate()) {
         if (this.editedIndex > -1) {
-          Object.assign(this.empresas[this.editedIndex], this.editedItem);
+          Object.assign(this.usuarios[this.editedIndex], this.editedItem);
           this.$http
-            .put(`/api/empresa/${this.editedItem.nIdEmpresa}`, this.editedItem)
+            .put(`/api/usuario/${this.editedItem.nIdUsuario}`, this.editedItem)
             .then(res => {
               console.log(res);
             })
@@ -281,7 +347,7 @@ export default {
         } else {
           this.empresas.push(this.editedItem);
           this.$http
-            .post("/api/empresa", this.editedItem)
+            .post("/api/usuario", this.editedItem)
             .then(res => {
               console.log(res);
             })
@@ -292,26 +358,42 @@ export default {
     },
 
     searchData() {
-      return this.empresas.some(
+      return this.usuarios.some(
         row =>
-          row.cRuc
+          row.cDNI
             .toString()
             .toLowerCase()
             .indexOf(this.search) > -1 ||
-          row.cRazonSocial
+          row.cNombre
+            .toString()
+            .toLowerCase()
+            .indexOf(this.search) > -1 ||
+          row.cApePaterno
+            .toString()
+            .toLowerCase()
+            .indexOf(this.search) > -1 ||
+          row.cApeMaterno
             .toString()
             .toLowerCase()
             .indexOf(this.search) > -1
       );
     },
     filterData() {
-      return this.empresas.filter(
+      return this.usuarios.filter(
         row =>
-          row.cRuc
+          row.cDNI
             .toString()
             .toLowerCase()
             .indexOf(this.search) > -1 ||
-          row.cRazonSocial
+          row.cNombre
+            .toString()
+            .toLowerCase()
+            .indexOf(this.search) > -1 ||
+          row.cApePaterno
+            .toString()
+            .toLowerCase()
+            .indexOf(this.search) > -1 ||
+          row.cApeMaterno
             .toString()
             .toLowerCase()
             .indexOf(this.search) > -1
@@ -319,6 +401,13 @@ export default {
     }
   },
   mounted() {
+    this.$http
+      .get("/api/usuario")
+      .then(res => {
+        this.usuarios = res.data;
+      })
+      .catch(error => console.log(error));
+
     this.$http
       .get("/api/empresa")
       .then(res => {
@@ -330,47 +419,22 @@ export default {
 </script>
 
 <style>
-.md-button {
-  background-color: #2196f3 !important;
-  color: white !important;
-  padding: 6px !important;
-  text-align: center;
+.v-menu > .v-menu__content {
+  max-width: none;
+  top: 0px !important;
+  left: 0px !important;
 }
 
-.md-field {
-  margin: 0px !important;
-  padding-top: 6px !important;
-  min-height: 30px !important;
+.v-list {
+  padding: 2px 0 !important;
 }
 
-.v-toolbar {
-  z-index: 1 !important;
+.v-list__tile {
+  font-size: 12px !important;
+  height: 30px !important;
 }
 
-.v-alert {
-  color: #8a6f6f !important;
+.container {
+  padding: 0px 18px 0px 18px !important;
 }
-.theme--light.v-messages {
-  color: red !important;
-}
-
-/*No results alert*/
-.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
-  background-color: #76bf5e !important;
-}
-.v-alert.v-alert {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-.inputNumber input[type="number"] {
-  -moz-appearance: textfield;
-}
-.inputNumber input::-webkit-outer-spin-button,
-.inputNumber input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-/* .v-text-field > .v-input__control > .v-input__slot:after {
-  border-color: #2196f3 !important;
-} */
 </style>

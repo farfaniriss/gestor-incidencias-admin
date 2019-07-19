@@ -14,6 +14,7 @@ import SeguimientoIncidencia from "@/pages/SeguimientoIncidencia/SeguimientoInci
 import RegistroEmpresa from "@/pages/Empresa/RegistroEmpresa.vue";
 import ListaEmpresa from "@/pages/Empresa/ListaEmpresa.vue";
 import RegistroPerfil from "@/pages/Perfil/RegistroPerfil.vue";
+import ListaUsuario from "@/pages/Usuario/ListaUsuario.vue";
 
 const routes = [
   {
@@ -98,6 +99,11 @@ const routes = [
         path: "/administracion/perfil",
         name: "Administracion > Perfil",
         component: RegistroPerfil
+      },
+      {
+        path: "/administracion/usuarios",
+        name: "Administracion > Usuarios",
+        component: ListaUsuario
       }
     ]
   }
