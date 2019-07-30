@@ -10,7 +10,8 @@ import "firebase/messaging";
 import Vuetify from "vuetify";
 
 // Setup axios as the Vue default $http library
-axios.defaults.baseURL = "http://jaamtech-api.azurewebsites.net"; // same as the Url the server listens to
+axios.defaults.baseURL = "https://jaamtech-api.azurewebsites.net";
+//axios.defaults.baseURL = "https://localhost:44341";
 Vue.prototype.$http = axios;
 
 // var firebaseConfig = {
@@ -67,6 +68,7 @@ import "./registerServiceWorker";
 
 // configure router
 const router = new VueRouter({
+  mode: 'history',
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
