@@ -86,53 +86,53 @@
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="empresaEdited"
-                    item-text="cRazonSocial"
-                    item-value="nIdEmpresa"
-                    :items="empresas"
-                    label="Empresa"
-                    return-object
-                  ></v-combobox>
+                        v-model="empresaEdited"
+                        item-text="cRazonSocial"
+                        item-value="nIdEmpresa"
+                        :items="empresas"
+                        label="Empresa"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="unidadOperativaEdited"
-                    item-text="cNomUniOpe"
-                    item-value="nIdUniOpe"
-                    :items="unidadesOperativasEdited"
-                    label="Unidad Operativa"
-                    return-object
-                  ></v-combobox>
+                        v-model="unidadOperativaEdited"
+                        item-text="cNomUniOpe"
+                        item-value="nIdUniOpe"
+                        :items="unidadesOperativasEdited"
+                        label="Unidad Operativa"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="sucursalesEdited"
-                    item-text="cNomSurcursal"
-                    item-value="nIdsucursal"
-                    :items="sucursalesEdited"
-                    label="Sucursal"
-                    return-object
-                  ></v-combobox>
-                    </v-flex>
-                    <v-flex xs12 sm12 md12>
-                        <v-combobox
-                    v-model="areaEdited"
-                    item-text="cNomArea"
-                    item-value="nIdArea"
-                    :items="areasEdited"
-                    label="Área"
-                    return-object
-                  ></v-combobox>
+                        v-model="sucursalesEdited"
+                        item-text="cNomSurcursal"
+                        item-value="nIdsucursal"
+                        :items="sucursalesEdited"
+                        label="Sucursal"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="cargoEdited"
-                    item-text="cNomCargo"
-                    item-value="nIdCargo"
-                    :items="cargosEdited"
-                    label="Cargo"
-                    return-object
-                  ></v-combobox>
+                        v-model="areaEdited"
+                        item-text="cNomArea"
+                        item-value="nIdArea"
+                        :items="areasEdited"
+                        label="Área"
+                        return-object
+                      ></v-combobox>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-combobox
+                        v-model="cargoEdited"
+                        item-text="cNomCargo"
+                        item-value="nIdCargo"
+                        :items="cargosEdited"
+                        label="Cargo"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -406,7 +406,7 @@ export default {
     }
   },
   watch: {
-    empresa: function (emp) {
+    empresa: function(emp) {
       console.log(emp.nIdEmpresa);
       this.$http
         .get(`/api/unidadOperativa?nIdEmpresa=${emp.nIdEmpresa}`)
@@ -430,7 +430,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    unidadOperativa: function (uniOpe) {
+    unidadOperativa: function(uniOpe) {
       this.$http
         .get(`/api/sucursal?nIdUniOpe=${uniOpe.nIdUniOpe}`)
         .then(res => {
@@ -442,7 +442,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    area: function (ar) {
+    area: function(ar) {
       this.$http
         .get(`/api/cargo?nIdArea=${ar.nIdArea}`)
         .then(res => {
@@ -450,11 +450,11 @@ export default {
           this.cargo = {
             nIdCargo: -1,
             cNomCargo: ""
-          }
+          };
         })
         .catch(error => console.log(error));
     },
-    empresaEdited: function (emp) {
+    empresaEdited: function(emp) {
       console.log(emp.nIdEmpresa);
       this.$http
         .get(`/api/unidadOperativa?nIdEmpresa=${emp.nIdEmpresa}`)
@@ -478,7 +478,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    unidadOperativaEdited: function (uniOpe) {
+    unidadOperativaEdited: function(uniOpe) {
       this.$http
         .get(`/api/sucursal?nIdUniOpe=${uniOpe.nIdUniOpe}`)
         .then(res => {
@@ -490,7 +490,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    areaEdited: function (ar) {
+    areaEdited: function(ar) {
       this.$http
         .get(`/api/cargo?nIdArea=${ar.nIdArea}`)
         .then(res => {
@@ -498,10 +498,10 @@ export default {
           this.cargoEdited = {
             nIdCargo: -1,
             cNomCargo: ""
-          }
+          };
         })
         .catch(error => console.log(error));
-    },
+    }
   },
   methods: {
     editItem(item) {
@@ -515,19 +515,19 @@ export default {
         nIdUniOpe: this.editedItem.nIdUniOpe,
         cNomUniOpe: this.editedItem.cNomUniOpe
       };
-      this.sucursalEdited = {
+      (this.sucursalEdited = {
         nIdsucursal: this.editedItem.nIdsucursal,
         cNomSurcursal: this.editedItem.cNomSurcursal
-      },
-      this.areaEdited = {
-        nIdArea: this.editedItem.nIdArea,
-        cNomArea: this.editedItem.cNomArea
-      },
-      this.cargoEdited = {
-        nIdCargo: this.editedItem.nIdCargo,
-        cNomCargo: this.editedItem.cNomCargo
-      },
-      this.dialog = true;
+      }),
+        (this.areaEdited = {
+          nIdArea: this.editedItem.nIdArea,
+          cNomArea: this.editedItem.cNomArea
+        }),
+        (this.cargoEdited = {
+          nIdCargo: this.editedItem.nIdCargo,
+          cNomCargo: this.editedItem.cNomCargo
+        }),
+        (this.dialog = true);
     },
 
     deleteItem(item) {

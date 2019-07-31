@@ -1,7 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
-import VueRouter from "vue-router";
 import App from "./App";
 import axios from "axios";
 import IncidenciaHub from "./incidencia-hub";
@@ -53,7 +52,7 @@ import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css"; //Vuesax styles
 
 // router setup
-import routes from "./routes/routes";
+import router from "./routes/routes";
 
 // Plugins
 import GlobalComponents from "./globalComponents";
@@ -67,16 +66,16 @@ import Chartist from "chartist";
 import "./registerServiceWorker";
 
 // configure router
-const router = new VueRouter({
-  mode: 'history',
-  routes, // short for routes: routes
-  linkExactActiveClass: "nav-item active"
-});
+// const router = new VueRouter({
+//   mode: "history",
+//   routes, // short for routes: routes
+//   linkExactActiveClass: "nav-item active"
+// });
 
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(IncidenciaHub);
-Vue.use(VueRouter);
+//Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
