@@ -41,9 +41,6 @@
                         required
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm12 md12>
-                      <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
-                    </v-flex>
                     <v-flex xs12 sm12 md6>
                       <v-text-field
                         v-model="editedItem.cApePaterno"
@@ -59,6 +56,9 @@
                         :rules="campoRequerido"
                         required
                       ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
@@ -86,53 +86,53 @@
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="empresaEdited"
-                    item-text="cRazonSocial"
-                    item-value="nIdEmpresa"
-                    :items="empresas"
-                    label="Empresa"
-                    return-object
-                  ></v-combobox>
+                        v-model="empresaEdited"
+                        item-text="cRazonSocial"
+                        item-value="nIdEmpresa"
+                        :items="empresas"
+                        label="Empresa"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="unidadOperativaEdited"
-                    item-text="cNomUniOpe"
-                    item-value="nIdUniOpe"
-                    :items="unidadesOperativasEdited"
-                    label="Unidad Operativa"
-                    return-object
-                  ></v-combobox>
+                        v-model="unidadOperativaEdited"
+                        item-text="cNomUniOpe"
+                        item-value="nIdUniOpe"
+                        :items="unidadesOperativasEdited"
+                        label="Unidad Operativa"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="sucursalesEdited"
-                    item-text="cNomSurcursal"
-                    item-value="nIdsucursal"
-                    :items="sucursalesEdited"
-                    label="Sucursal"
-                    return-object
-                  ></v-combobox>
-                    </v-flex>
-                    <v-flex xs12 sm12 md12>
-                        <v-combobox
-                    v-model="areaEdited"
-                    item-text="cNomArea"
-                    item-value="nIdArea"
-                    :items="areasEdited"
-                    label="Área"
-                    return-object
-                  ></v-combobox>
+                        v-model="sucursalEdited"
+                        item-text="cNomSurcursal"
+                        item-value="nIdsucursal"
+                        :items="sucursalesEdited"
+                        label="Sucursal"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-combobox
-                    v-model="cargoEdited"
-                    item-text="cNomCargo"
-                    item-value="nIdCargo"
-                    :items="cargosEdited"
-                    label="Cargo"
-                    return-object
-                  ></v-combobox>
+                        v-model="areaEdited"
+                        item-text="cNomArea"
+                        item-value="nIdArea"
+                        :items="areasEdited"
+                        label="Área"
+                        return-object
+                      ></v-combobox>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-combobox
+                        v-model="cargoEdited"
+                        item-text="cNomCargo"
+                        item-value="nIdCargo"
+                        :items="cargosEdited"
+                        label="Cargo"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -406,7 +406,7 @@ export default {
     }
   },
   watch: {
-    empresa: function (emp) {
+    empresa: function(emp) {
       console.log(emp.nIdEmpresa);
       this.$http
         .get(`/api/unidadOperativa?nIdEmpresa=${emp.nIdEmpresa}`)
@@ -430,7 +430,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    unidadOperativa: function (uniOpe) {
+    unidadOperativa: function(uniOpe) {
       this.$http
         .get(`/api/sucursal?nIdUniOpe=${uniOpe.nIdUniOpe}`)
         .then(res => {
@@ -442,7 +442,7 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    area: function (ar) {
+    area: function(ar) {
       this.$http
         .get(`/api/cargo?nIdArea=${ar.nIdArea}`)
         .then(res => {
@@ -450,11 +450,11 @@ export default {
           this.cargo = {
             nIdCargo: -1,
             cNomCargo: ""
-          }
+          };
         })
         .catch(error => console.log(error));
     },
-    empresaEdited: function (emp) {
+    empresaEdited: function(emp) {
       console.log(emp.nIdEmpresa);
       this.$http
         .get(`/api/unidadOperativa?nIdEmpresa=${emp.nIdEmpresa}`)
@@ -478,19 +478,19 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    unidadOperativaEdited: function (uniOpe) {
+    unidadOperativaEdited: function(uniOpe) {
       this.$http
         .get(`/api/sucursal?nIdUniOpe=${uniOpe.nIdUniOpe}`)
         .then(res => {
           this.sucursalesEdited = res.data;
-          this.sucursalesEdited = {
+          this.sucursalEdited = {
             nIdsucursal: -1,
             cNomSurcursal: ""
           };
         })
         .catch(error => console.log(error));
     },
-    areaEdited: function (ar) {
+    areaEdited: function(ar) {
       this.$http
         .get(`/api/cargo?nIdArea=${ar.nIdArea}`)
         .then(res => {
@@ -498,10 +498,10 @@ export default {
           this.cargoEdited = {
             nIdCargo: -1,
             cNomCargo: ""
-          }
+          };
         })
         .catch(error => console.log(error));
-    },
+    }
   },
   methods: {
     editItem(item) {
@@ -515,19 +515,19 @@ export default {
         nIdUniOpe: this.editedItem.nIdUniOpe,
         cNomUniOpe: this.editedItem.cNomUniOpe
       };
-      this.sucursalEdited = {
+      (this.sucursalEdited = {
         nIdsucursal: this.editedItem.nIdsucursal,
         cNomSurcursal: this.editedItem.cNomSurcursal
-      },
-      this.areaEdited = {
-        nIdArea: this.editedItem.nIdArea,
-        cNomArea: this.editedItem.cNomArea
-      },
-      this.cargoEdited = {
-        nIdCargo: this.editedItem.nIdCargo,
-        cNomCargo: this.editedItem.cNomCargo
-      },
-      this.dialog = true;
+      }),
+        (this.areaEdited = {
+          nIdArea: this.editedItem.nIdArea,
+          cNomArea: this.editedItem.cNomArea
+        }),
+        (this.cargoEdited = {
+          nIdCargo: this.editedItem.nIdCargo,
+          cNomCargo: this.editedItem.cNomCargo
+        }),
+        (this.dialog = true);
     },
 
     deleteItem(item) {
@@ -560,6 +560,7 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.editedIndex > -1) {
           Object.assign(this.usuarios[this.editedIndex], this.editedItem);
+          this.close();
           this.$http
             .put(`/api/usuario/${this.editedItem.nIdUsuario}`, this.editedItem)
             .then(res => {
@@ -567,59 +568,101 @@ export default {
             })
             .catch(error => console.log(error));
         } else {
+          this.editedItem.nIdEmpresa = this.empresaEdited.nIdEmpresa;
+          this.editedItem.cRazonSocial = this.empresaEdited.cRazonSocial;
+          this.editedItem.nIdsucursal = this.sucursalEdited.nIdsucursal;
+          this.editedItem.cNomSurcursal = this.sucursalEdited.cNomSurcursal;
+          this.editedItem.nIdUniOpe = this.unidadOperativaEdited.nIdUniOpe;
+          this.editedItem.cNomUniOpe = this.unidadOperativaEdited.cNomUniOpe;
+          this.editedItem.nIdArea = this.areaEdited.nIdArea;
+          this.editedItem.cNomArea = this.areaEdited.cNomArea;
+          this.editedItem.nIdCargo = this.cargoEdited.nIdCargo;
+          this.editedItem.cNomCargo = this.cargoEdited.cNomCargo;
           this.$http
             .post("/api/usuario", this.editedItem)
             .then(res => {
               console.log(res.data);
               this.editedItem.nIdUsuario = res.data.nIdUsuario;
-              this.empresas.push(this.editedItem);
+              this.usuarios.push(this.editedItem);
+              this.close();
             })
             .catch(error => console.log(error));
         }
-        this.close();
       }
     },
 
     searchData() {
       return this.usuarios.some(
         row =>
-          row.cDNI
+          (row.cDNI
             .toString()
             .toLowerCase()
             .indexOf(this.search) > -1 ||
-          row.cNombre
-            .toString()
-            .toLowerCase()
-            .indexOf(this.search) > -1 ||
-          row.cApePaterno
-            .toString()
-            .toLowerCase()
-            .indexOf(this.search) > -1 ||
-          row.cApeMaterno
-            .toString()
-            .toLowerCase()
-            .indexOf(this.search) > -1
+            row.cNombre
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search) > -1 ||
+            row.cApePaterno
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search) > -1 ||
+            row.cApeMaterno
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search) > -1) &&
+          row.nIdEmpresa ==
+            (this.empresa.nIdEmpresa == -1
+              ? row.nIdEmpresa
+              : this.empresa.nIdEmpresa) &&
+          row.nIdUniOpe ==
+            (this.unidadOperativa.nIdUniOpe == -1
+              ? row.nIdUniOpe
+              : this.unidadOperativa.nIdUniOpe) &&
+          row.nIdsucursal ==
+            (this.sucursal.nIdsucursal == -1
+              ? row.nIdsucursal
+              : this.sucursal.nIdsucursal) &&
+          row.nIdArea ==
+            (this.area.nIdArea == -1 ? row.nIdArea : this.area.nIdArea) &&
+          row.nIdCargo ==
+            (this.cargo.nIdCargo == -1 ? row.nIdCargo : this.cargo.nIdCargo)
       );
     },
     filterData() {
       return this.usuarios.filter(
         row =>
-          row.cDNI
+          (row.cDNI
             .toString()
             .toLowerCase()
             .indexOf(this.search) > -1 ||
-          row.cNombre
-            .toString()
-            .toLowerCase()
-            .indexOf(this.search) > -1 ||
-          row.cApePaterno
-            .toString()
-            .toLowerCase()
-            .indexOf(this.search) > -1 ||
-          row.cApeMaterno
-            .toString()
-            .toLowerCase()
-            .indexOf(this.search) > -1
+            row.cNombre
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search) > -1 ||
+            row.cApePaterno
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search) > -1 ||
+            row.cApeMaterno
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search) > -1) &&
+          row.nIdEmpresa ==
+            (this.empresa.nIdEmpresa == -1
+              ? row.nIdEmpresa
+              : this.empresa.nIdEmpresa) &&
+          row.nIdUniOpe ==
+            (this.unidadOperativa.nIdUniOpe == -1
+              ? row.nIdUniOpe
+              : this.unidadOperativa.nIdUniOpe) &&
+          row.nIdsucursal ==
+            (this.sucursal.nIdsucursal == -1
+              ? row.nIdsucursal
+              : this.sucursal.nIdsucursal) &&
+          row.nIdArea ==
+            (this.area.nIdArea == -1 ? row.nIdArea : this.area.nIdArea) &&
+          row.nIdCargo ==
+            (this.cargo.nIdCargo == -1 ? row.nIdCargo : this.cargo.nIdCargo)
       );
     }
   },
@@ -659,5 +702,9 @@ export default {
 
 .container {
   padding: 0px 18px 0px 18px !important;
+}
+
+.v-menu__content--fixed {
+  position: absolute !important;
 }
 </style>
