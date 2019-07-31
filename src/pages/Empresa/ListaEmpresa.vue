@@ -211,7 +211,7 @@ export default {
     },
     rucRules: [
       v => !!v || "El campo es requerido",
-      v => v.length <= 11 || "RUC no debe tener más de 11 caracteres",
+      v => v.length == 11 || "RUC debe tener 11 caracteres",
       v => /^\d*$/.test(v) || "RUC sólo puede contener números"
     ],
     razonSocialRules: [
@@ -272,6 +272,7 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.editedIndex > -1) {
           Object.assign(this.empresas[this.editedIndex], this.editedItem);
+          this.close();
           this.$http
             .put(`/api/empresa/${this.editedItem.nIdEmpresa}`, this.editedItem)
             .then(res => {
@@ -279,15 +280,18 @@ export default {
             })
             .catch(error => console.log(error));
         } else {
-          this.empresas.push(this.editedItem);
+          console.log(this.editedItem);
           this.$http
             .post("/api/empresa", this.editedItem)
             .then(res => {
-              console.log(res);
+              console.log(res.data.nIdEmpresa);
+              console.log(this.editedItem);
+              this.editedItem.nIdEmpresa = res.data.nIdEmpresa;
+              this.empresas.push(this.editedItem);
+              this.close();
             })
             .catch(error => console.log(error));
         }
-        this.close();
       }
     },
 
