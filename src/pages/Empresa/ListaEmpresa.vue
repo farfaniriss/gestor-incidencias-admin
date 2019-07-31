@@ -43,45 +43,75 @@
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
+                      <v-combobox
+                        v-model="planPago"
+                        item-text="cNomPlanPago"
+                        item-value="nIdPlanPago"
+                        :items="planesPagos"
+                        label="Plan de pago"
+                        return-object
+                      ></v-combobox>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
                       <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
+                      <div class="title font-weight-light">Datos contacto</div>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cDNIContacto"
-                        label="DNI Contacto"
+                        v-model="editedItem.contacto.cDNI"
+                        label="DNI"
+                        type="number"
+                        class="inputNumber"
+                        :counter="8"
+                        :rules="dniRules"
+                        :disabled="editedIndex > -1"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md4>
+                      <v-text-field
+                        v-model="editedItem.contacto.cNombre"
+                        label="Nombre"
                         :rules="campoRequerido"
+                        :disabled="editedIndex > -1"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md4>
+                      <v-text-field
+                        v-model="editedItem.contacto.cApePaterno"
+                        label="Ape. Paterno"
+                        :rules="campoRequerido"
+                        :disabled="editedIndex > -1"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 sm12 md4>
+                      <v-text-field
+                        v-model="editedItem.contacto.cApeMaterno"
+                        label="Ape. Materno"
+                        :rules="campoRequerido"
+                        :disabled="editedIndex > -1"
                         required
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cNomContacto"
-                        label="Nombre Contacto"
-                        :rules="campoRequerido"
-                        required
-                      ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm12 md12>
-                      <v-text-field
-                        v-model="editedItem.cEmailContacto"
-                        label="Email Contacto"
+                        v-model="editedItem.contacto.cEmail"
+                        label="Email"
                         :rules="emailRules"
+                        :disabled="editedIndex > -1"
                         required
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cTelContacto"
-                        label="Teléfono Contacto"
+                        v-model="editedItem.contacto.cCelular"
+                        label="Celular"
                         :rules="campoRequerido"
-                        required
-                      ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm12 md12>
-                      <v-text-field
-                        v-model="editedItem.cCelContacto"
-                        label="Celular Contacto"
-                        :rules="campoRequerido"
+                        :disabled="editedIndex > -1"
                         required
                       ></v-text-field>
                     </v-flex>
@@ -118,6 +148,7 @@
               ></v-text-field>
             </v-card-title>
             <v-data-table
+              v-if="empresas"
               :headers="headers"
               :items="empresas"
               :search="search"
@@ -130,12 +161,12 @@
               <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.cRuc }}</td>
                 <td class="text-xs-left">{{ props.item.cRazonSocial }}</td>
+                <td class="text-xs-left">{{ props.item.cNomPlanPago }}</td>
+                <td class="text-xs-left">{{ props.item.contacto.cDNI }}</td>
+                <td class="text-xs-left">{{ props.item.contacto.nombreCompleto }}</td>
+                <td class="text-xs-left">{{ props.item.contacto.cEmail }}</td>
+                <td class="text-xs-left">{{ props.item.contacto.cCelular }}</td>
                 <td class="text-xs-left">{{ props.item.cPaginaWeb }}</td>
-                <td class="text-xs-left">{{ props.item.cDNIContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cNomContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cEmailContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cTelContacto }}</td>
-                <td class="text-xs-left">{{ props.item.cCelContacto }}</td>
                 <td class="justify-start layout">
                   <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
                   <v-icon small @click.stop="deleteItem(props.item)">delete</v-icon>
@@ -168,30 +199,36 @@ export default {
     headers: [
       { text: "Ruc", value: "cRuc" },
       { text: "Razon social", value: "cRazonSocial" },
+      { text: "Plan Pago", value: "cNomPlanPago" },
+      { text: "DNI Contacto", value: "contacto.cDNI" },
+      { text: "Nombre Contacto", value: "contacto.nombreCompleto" },
+      { text: "Email Contacto", value: "contacto.cEmail" },
+      { text: "Celular Contacto", value: "contacto.cCelular" },
       { text: "Pagina web", value: "cPaginaWeb" },
-      { text: "DNI Contacto", value: "cDNIContacto" },
-      { text: "Nombre Contacto", value: "cNomContacto" },
-      { text: "Email Contacto", value: "cEmailContacto" },
-      { text: "Teléfono Contacto", value: "cTelContacto" },
-      { text: "Celular Contacto", value: "cCelContacto" },
       { text: "Acciones", value: "cRuc", sortable: false }
     ],
     empresas: [],
+    planesPagos: [],
     editedIndex: -1,
-    indexToDelete: -1,
+    itemToDelete: null,
+    planPago: {
+      nIdPlanPago: -1,
+      cNomPlanPago: ""
+    },
     editedItem: {
       nIdEmpresa: 0,
       cRuc: "",
       cRazonSocial: "",
       cPaginaWeb: "",
-      cDNIContacto: "",
-      cNomContacto: "",
-      cEmailContacto: "",
-      cTelContacto: "",
-      cCelContacto: "",
-      usuSesion: {
-        UserId: 1,
-        Username: "jxalxi"
+      nIdPlanPago: -1,
+      contacto: {
+        nIdUsuario: 0,
+        cDNI: "",
+        cNombre: "",
+        cApePaterno: "",
+        cApeMaterno: "",
+        cEmail: "",
+        cCelular: ""
       }
     },
     defaultItem: {
@@ -199,20 +236,29 @@ export default {
       cRuc: "",
       cRazonSocial: "",
       cPaginaWeb: "",
-      cDNIContacto: "",
-      cNomContacto: "",
-      cEmailContacto: "",
-      cTelContacto: "",
-      cCelContacto: "",
-      usuSesion: {
-        UserId: 1,
-        Username: "jxalxi"
+      nIdPlanPago: -1,
+      contacto: {
+        nIdUsuario: 0,
+        cDNI: "",
+        cNombre: "",
+        cApePaterno: "",
+        cApeMaterno: "",
+        cEmail: "",
+        cCelular: "",
+        usuSesion: {
+          nIdUsuario: 1
+        }
       }
     },
     rucRules: [
       v => !!v || "El campo es requerido",
       v => v.length == 11 || "RUC debe tener 11 caracteres",
       v => /^\d*$/.test(v) || "RUC sólo puede contener números"
+    ],
+    dniRules: [
+      v => !!v || "El campo es requerido",
+      v => v.length == 8 || "DNI debe tener 8 caracteres",
+      v => /^\d*$/.test(v) || "DNI sólo puede contener números"
     ],
     razonSocialRules: [
       v => !!v || "El campo es requerido",
@@ -239,21 +285,31 @@ export default {
     editItem(item) {
       this.editedIndex = this.empresas.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      this.planPago = {
+        nIdPlanPago: item.nIdPlanPago,
+        cNomPlanPago: item.cNomPlanPago
+      };
       this.dialog = true;
     },
 
     deleteItem(item) {
       this.dialogDelete = true;
-      this.indexToDelete = this.empresas.indexOf(item);
+      this.itemToDelete = item;
     },
 
     confirmDelete() {
-      this.empresas.splice(this.indexToDelete, 1);
-      let nIdEmpresa = this.empresas[this.indexToDelete].nIdEmpresa;
+      let nIdEmpresa = this.itemToDelete.nIdEmpresa;
+      console.log(nIdEmpresa);
+      let nIdUsuSesion = 1;
       this.$http
-        .delete(`/api/empresa/${nIdEmpresa}`)
+        .delete(`/api/empresa/${nIdEmpresa}/${nIdUsuSesion}`)
         .then(res => {
           console.log(res);
+          let indexToDelete = this.empresas.findIndex(
+            x => x.nIdEmpresa == nIdEmpresa
+          );
+          console.log(indexToDelete);
+          this.empresas.splice(indexToDelete, 1);
         })
         .catch(error => console.log(error));
       this.dialogDelete = false;
@@ -270,6 +326,9 @@ export default {
 
     save() {
       if (this.$refs.form.validate()) {
+        this.editedItem.nIdPlanPago = this.planPago.nIdPlanPago;
+        this.editedItem.cNomPlanPago = this.planPago.cNomPlanPago;
+        this.editedItem.usuSesion = { nIdUsuario: 1 };
         if (this.editedIndex > -1) {
           Object.assign(this.empresas[this.editedIndex], this.editedItem);
           this.close();
@@ -280,13 +339,11 @@ export default {
             })
             .catch(error => console.log(error));
         } else {
-          console.log(this.editedItem);
           this.$http
             .post("/api/empresa", this.editedItem)
             .then(res => {
-              console.log(res.data.nIdEmpresa);
-              console.log(this.editedItem);
               this.editedItem.nIdEmpresa = res.data.nIdEmpresa;
+              this.editedItem.contacto = res.data.contacto;
               this.empresas.push(this.editedItem);
               this.close();
             })
@@ -327,6 +384,13 @@ export default {
       .get("/api/empresa")
       .then(res => {
         this.empresas = res.data;
+      })
+      .catch(error => console.log(error));
+
+    this.$http
+      .get("/api/planPago")
+      .then(res => {
+        this.planesPagos = res.data;
       })
       .catch(error => console.log(error));
   }

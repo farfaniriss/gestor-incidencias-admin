@@ -33,7 +33,7 @@
                         required
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm12 md12>
+                    <v-flex xs12 sm12 md4>
                       <v-text-field
                         v-model="editedItem.cNombre"
                         :rules="campoRequerido"
@@ -41,7 +41,7 @@
                         required
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm12 md6>
+                    <v-flex xs12 sm12 md4>
                       <v-text-field
                         v-model="editedItem.cApePaterno"
                         label="Apellido paterno"
@@ -49,16 +49,13 @@
                         required
                       ></v-text-field>
                     </v-flex>
-                    <v-flex xs12 sm12 md6>
+                    <v-flex xs12 sm12 md4>
                       <v-text-field
                         v-model="editedItem.cApeMaterno"
                         label="Apellido materno"
                         :rules="campoRequerido"
                         required
                       ></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm12 md12>
-                      <v-text-field v-model="editedItem.cPaginaWeb" label="Página web"></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
@@ -78,8 +75,8 @@
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
-                        v-model="editedItem.cCelContacto"
-                        label="Celular Contacto"
+                        v-model="editedItem.cCelular"
+                        label="Celular"
                         :rules="campoRequerido"
                         required
                       ></v-text-field>
