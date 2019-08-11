@@ -557,11 +557,11 @@ export default {
       if (this.$refs.form.validate()) {
         if (this.editedIndex > -1) {
           Object.assign(this.usuarios[this.editedIndex], this.editedItem);
-          this.close();
           this.$http
             .put(`/api/usuario/${this.editedItem.nIdUsuario}`, this.editedItem)
             .then(res => {
               console.log(res);
+              this.close();
             })
             .catch(error => console.log(error));
         } else {

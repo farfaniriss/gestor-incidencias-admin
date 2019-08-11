@@ -40,10 +40,20 @@
             <router-link to="/administracion/perfil" :class="{'pl-2': !showIcons}">
               <md-icon>group_add</md-icon>Perfil
             </router-link>
-          </md-list-item> -->
+          </md-list-item>-->
           <md-list-item @click="hideSidebar">
             <router-link to="/administracion/usuarios" :class="{'pl-2': !showIcons}">
               <md-icon>person_add</md-icon>Usuario
+            </router-link>
+          </md-list-item>
+          <md-list-item @click="hideSidebar">
+            <router-link to="/administracion/unidadoperativa" :class="{'pl-2': !showIcons}">
+              <md-icon>person_add</md-icon>U. Ope / Sucursal
+            </router-link>
+          </md-list-item>
+          <md-list-item @click="hideSidebar">
+            <router-link to="/administracion/area" :class="{'pl-2': !showIcons}">
+              <md-icon>person_add</md-icon>Area / Cargo
             </router-link>
           </md-list-item>
         </md-list>

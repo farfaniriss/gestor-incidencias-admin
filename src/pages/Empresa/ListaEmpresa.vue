@@ -118,6 +118,11 @@
                   </v-layout>
                 </v-container>
               </v-form>
+              <div v-if="errored" class="v-messages theme--light error--text">
+                <div class="v-messages__wrapper">
+                  <div class="v-messages__message">{{ errorMessage }}</div>
+                </div>
+              </div>
             </v-card-text>
 
             <v-card-actions>
@@ -192,6 +197,8 @@ export default {
   name: "TableSearch",
   data: () => ({
     valid: true,
+    errored: false,
+    errorMessage: null,
     dialog: false,
     dialogDelete: false,
     search: "",
@@ -228,7 +235,10 @@ export default {
         cApePaterno: "",
         cApeMaterno: "",
         cEmail: "",
-        cCelular: ""
+        cCelular: "",
+        usuSesion: {
+          UserId: 1
+        }
       }
     },
     defaultItem: {
@@ -320,6 +330,8 @@ export default {
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
+        this.errored = false;
+        this.errorMessage = null;
         this.$refs.form.reset();
       }, 300);
     },
@@ -331,13 +343,17 @@ export default {
         this.editedItem.usuSesion = { nIdUsuario: 1 };
         if (this.editedIndex > -1) {
           Object.assign(this.empresas[this.editedIndex], this.editedItem);
-          this.close();
           this.$http
             .put(`/api/empresa/${this.editedItem.nIdEmpresa}`, this.editedItem)
             .then(res => {
               console.log(res);
+              this.close();
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+              console.log(error.response.data);
+              this.errored = true;
+              this.errorMessage = error.response.data;
+            });
         } else {
           this.$http
             .post("/api/empresa", this.editedItem)
@@ -347,7 +363,11 @@ export default {
               this.empresas.push(this.editedItem);
               this.close();
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+              console.log(error.response.data);
+              this.errored = true;
+              this.errorMessage = error.response.data;
+            });
         }
       }
     },
@@ -358,11 +378,11 @@ export default {
           row.cRuc
             .toString()
             .toLowerCase()
-            .indexOf(this.search) > -1 ||
+            .indexOf(this.search.toLowerCase()) > -1 ||
           row.cRazonSocial
             .toString()
             .toLowerCase()
-            .indexOf(this.search) > -1
+            .indexOf(this.search.toLowerCase()) > -1
       );
     },
     filterData() {
@@ -371,11 +391,11 @@ export default {
           row.cRuc
             .toString()
             .toLowerCase()
-            .indexOf(this.search) > -1 ||
+            .indexOf(this.search.toLowerCase()) > -1 ||
           row.cRazonSocial
             .toString()
             .toLowerCase()
-            .indexOf(this.search) > -1
+            .indexOf(this.search.toLowerCase()) > -1
       );
     }
   },

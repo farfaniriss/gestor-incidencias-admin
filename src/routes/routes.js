@@ -8,6 +8,8 @@ import RegistroPerfil from "@/pages/Perfil/RegistroPerfil.vue";
 import ListaUsuario from "@/pages/Usuario/ListaUsuario.vue";
 import Login from "@/pages/Login/Login.vue";
 import CambioClave from "@/pages/CambioClave/CambioClave.vue";
+import UnidadOperativaSucursal from "@/pages/UnidadOperativaSucursal/UnidadOperativaSucursal.vue";
+import AreaCargo from "@/pages/AreaCargo/AreaCargo.vue";
 import { TokenService } from "../storage.service";
 
 Vue.use(Router);
@@ -62,6 +64,16 @@ const router = new Router({
           //   requiresAuth: true,
           //   is_admin: true
           // }
+        },
+        {
+          path: "/administracion/unidadoperativa",
+          name: "Administracion > Unidades Operativas / Sucursales",
+          component: UnidadOperativaSucursal
+        },
+        {
+          path: "/administracion/area",
+          name: "Administracion > Areas / Cargos",
+          component: AreaCargo
         }
       ]
     },
