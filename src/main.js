@@ -9,8 +9,8 @@ import "firebase/messaging";
 import Vuetify from "vuetify";
 
 // Setup axios as the Vue default $http library
-//axios.defaults.baseURL = "https://jaamtech-api.azurewebsites.net";
-axios.defaults.baseURL = "https://localhost:44341";
+axios.defaults.baseURL = "https://jaamtech-api.azurewebsites.net";
+//axios.defaults.baseURL = "https://localhost:44341";
 Vue.prototype.$http = axios;
 
 // var firebaseConfig = {
@@ -71,6 +71,21 @@ import "./registerServiceWorker";
 //   routes, // short for routes: routes
 //   linkExactActiveClass: "nav-item active"
 // });
+
+Vue.filter('formatDate', function (value) {
+  if (value) {
+      let valueDate = new Date(value);
+      return  appendLeadingZeroes(valueDate.getDate()) + "/" + appendLeadingZeroes(valueDate.getMonth() + 1) + "/" + valueDate.getFullYear();
+  }
+  return value;
+});
+
+function appendLeadingZeroes(n) {
+  if (n < 9) {
+      return "0" + n;
+  }
+  return n
+}
 
 Vue.prototype.$Chartist = Chartist;
 

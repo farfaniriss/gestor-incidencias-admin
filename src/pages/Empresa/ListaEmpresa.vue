@@ -299,16 +299,13 @@ export default {
 
     confirmDelete() {
       let nIdEmpresa = this.itemToDelete.nIdEmpresa;
-      console.log(nIdEmpresa);
       let nIdUsuSesion = 1;
       this.$http
         .delete(`/api/empresa/${nIdEmpresa}/${nIdUsuSesion}`)
         .then(res => {
-          console.log(res);
           let indexToDelete = this.empresas.findIndex(
             x => x.nIdEmpresa == nIdEmpresa
           );
-          console.log(indexToDelete);
           this.empresas.splice(indexToDelete, 1);
         })
         .catch(error => console.log(error));

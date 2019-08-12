@@ -14,7 +14,13 @@
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialog" max-width="500px" persistent>
-          <v-card>
+          <v-card v-if="isSaving">
+            <div class="text-center">
+              <v-progress-circular :size="50" color="green" indeterminate></v-progress-circular>
+              <p class="overline">Guardando...</p>
+            </div>
+          </v-card>
+          <v-card v-else>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
             </v-card-title>
@@ -58,12 +64,16 @@
                       ></v-text-field>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
-                      <v-text-field
+                      <div class="caption theme--light v-label">Fecha de nacimiento</div>
+                      <datepicker
+                        :language="es"
                         v-model="editedItem.dFecNacimiento"
-                        label="Fecha nacimiento"
-                        :rules="campoRequerido"
-                        required
-                      ></v-text-field>
+                        placeholder="Seleccione fecha"
+                        wrapper-class="v-text-field__slot"
+                        calendar-button
+                        format="dd/MM/yyyy"
+                        calendar-button-icon="fa fa-calendar"
+                      ></datepicker>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
@@ -134,8 +144,12 @@
                   </v-layout>
                 </v-container>
               </v-form>
+              <div v-if="errored" class="v-messages theme--light error--text pl-3">
+                <div class="v-messages__wrapper">
+                  <div class="v-messages__message">{{ errorMessage }}</div>
+                </div>
+              </div>
             </v-card-text>
-
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -233,7 +247,7 @@
                 <td class="text-xs-left">{{ props.item.cNombre }}</td>
                 <td class="text-xs-left">{{ props.item.cApePaterno }}</td>
                 <td class="text-xs-left">{{ props.item.cApeMaterno }}</td>
-                <td class="text-xs-left">{{ props.item.dFecNacimiento }}</td>
+                <td class="text-xs-left">{{ props.item.dFecNacimiento | formatDate }}</td>
                 <td class="text-xs-left">{{ props.item.cEmail }}</td>
                 <td class="text-xs-left">{{ props.item.cCelular }}</td>
                 <td class="text-xs-left">{{ props.item.cRazonSocial }}</td>
@@ -258,13 +272,27 @@
 </template>
 
 <script>
+import Datepicker from "vuejs-datepicker";
+import { es } from "vuejs-datepicker/dist/locale";
+
 const toLower = text => {
   return text.toString().toLowerCase();
 };
 
 export default {
   name: "TableSearch",
+  components: {
+    Datepicker
+  },
   data: () => ({
+    es: es,
+    errored: false,
+    errorMessage: null,
+    isSaving: false,
+    date: new Date().toISOString().substr(0, 10),
+    menu: false,
+    modal: false,
+    menu2: false,
     valid: true,
     dialog: false,
     dialogDelete: false,
@@ -297,7 +325,7 @@ export default {
     areasEdited: [],
     cargosEdited: [],
     editedIndex: -1,
-    indexToDelete: -1,
+    itemToDelete: null,
     editedItem: {
       nIdUsuario: 0,
       cDNI: "",
@@ -388,7 +416,7 @@ export default {
     },
     dniRules: [
       v => !!v || "El campo es requerido",
-      v => v.length <= 8 || "DNI no debe tener más de 8 caracteres",
+      v => v.length == 8 || "DNI debe tener 8 caracteres",
       v => /^\d*$/.test(v) || "DNI sólo puede contener números"
     ],
     emailRules: [
@@ -529,16 +557,23 @@ export default {
 
     deleteItem(item) {
       this.dialogDelete = true;
-      this.indexToDelete = this.usuarios.indexOf(item);
+      this.itemToDelete = item;
     },
 
     confirmDelete() {
-      this.usuarios.splice(this.indexToDelete, 1);
-      let nIdUsuario = this.usuarios[this.indexToDelete].nIdUsuario;
+      let nIdUsuario = this.itemToDelete.nIdUsuario;
+      let nIdUsuSesion = 1;
       this.$http
-        .delete(`/api/usuario/${nIdUsuario}`)
+        .delete(`/api/usuario/${nIdUsuario}/${nIdUsuSesion}`)
         .then(res => {
           console.log(res);
+          let indexToDelete = this.usuarios.findIndex(
+            x => x.nIdUsuario == nIdUsuario
+          );
+          console.log("nIdUsuario", nIdUsuario);
+          console.log(this.usuarios);
+          console.log(indexToDelete);
+          this.usuarios.splice(indexToDelete, 1);
         })
         .catch(error => console.log(error));
       this.dialogDelete = false;
@@ -550,11 +585,24 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
         this.$refs.form.reset();
+        this.errorMessage = "";
+        this.errored = false;
       }, 300);
     },
 
     save() {
       if (this.$refs.form.validate()) {
+        this.editedItem.nIdEmpresa = this.empresaEdited.nIdEmpresa;
+        this.editedItem.cRazonSocial = this.empresaEdited.cRazonSocial;
+        this.editedItem.nIdsucursal = this.sucursalEdited.nIdsucursal;
+        this.editedItem.cNomSurcursal = this.sucursalEdited.cNomSurcursal;
+        this.editedItem.nIdUniOpe = this.unidadOperativaEdited.nIdUniOpe;
+        this.editedItem.cNomUniOpe = this.unidadOperativaEdited.cNomUniOpe;
+        this.editedItem.nIdArea = this.areaEdited.nIdArea;
+        this.editedItem.cNomArea = this.areaEdited.cNomArea;
+        this.editedItem.nIdCargo = this.cargoEdited.nIdCargo;
+        this.editedItem.cNomCargo = this.cargoEdited.cNomCargo;
+        this.editedItem.usuSesion = { nIdUsuario: 1 };
         if (this.editedIndex > -1) {
           Object.assign(this.usuarios[this.editedIndex], this.editedItem);
           this.close();
@@ -563,27 +611,30 @@ export default {
             .then(res => {
               console.log(res);
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+              console.log(error);
+              this.errored = true;
+              this.errorMessage = error.response.data;
+            });
         } else {
-          this.editedItem.nIdEmpresa = this.empresaEdited.nIdEmpresa;
-          this.editedItem.cRazonSocial = this.empresaEdited.cRazonSocial;
-          this.editedItem.nIdsucursal = this.sucursalEdited.nIdsucursal;
-          this.editedItem.cNomSurcursal = this.sucursalEdited.cNomSurcursal;
-          this.editedItem.nIdUniOpe = this.unidadOperativaEdited.nIdUniOpe;
-          this.editedItem.cNomUniOpe = this.unidadOperativaEdited.cNomUniOpe;
-          this.editedItem.nIdArea = this.areaEdited.nIdArea;
-          this.editedItem.cNomArea = this.areaEdited.cNomArea;
-          this.editedItem.nIdCargo = this.cargoEdited.nIdCargo;
-          this.editedItem.cNomCargo = this.cargoEdited.cNomCargo;
+          this.isSaving = true;
           this.$http
             .post("/api/usuario", this.editedItem)
             .then(res => {
               console.log(res.data);
               this.editedItem.nIdUsuario = res.data.nIdUsuario;
+              this.editedItem.cCodUsu = res.data.cCodUsu;
               this.usuarios.push(this.editedItem);
+              this.dialog = false;
               this.close();
+              this.isSaving = false;
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+              console.log(error);
+              this.isSaving = false;
+              this.errored = true;
+              this.errorMessage = error.response.data;
+            });
         }
       }
     },
