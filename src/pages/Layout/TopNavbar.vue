@@ -42,6 +42,10 @@
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Perfil</p>
             </md-list-item>
+            <md-list-item @click="logout">
+              <i class="material-icons">exit_to_app</i>
+              <p class="hidden-lg hidden-md">Salir</p>
+            </md-list-item>
           </md-list>
         </div>
       </div>
@@ -50,6 +54,9 @@
 </template>
 
 <script>
+import { TokenService } from "../../storage.service";
+import router from "../../routes/routes";
+
 export default {
   data() {
     return {
@@ -69,6 +76,10 @@ export default {
   methods: {
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+    },
+    logout() {
+      TokenService.removeToken();
+      router.push("/login");
     }
   }
 };
