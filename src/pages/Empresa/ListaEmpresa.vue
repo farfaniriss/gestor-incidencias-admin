@@ -13,6 +13,16 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <md-card v-if="isLoading">
+          <v-dialog v-model="isLoading" hide-overlay persistent width="300">
+            <v-card color="primary" dark>
+              <v-card-text>
+                Por favor, espere...
+                <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </md-card>
         <v-dialog v-model="dialog" max-width="500px" persistent>
           <v-card>
             <v-card-title>
@@ -199,6 +209,7 @@ export default {
     valid: true,
     errored: false,
     errorMessage: null,
+    isLoading: false,
     dialog: false,
     dialogDelete: false,
     search: "",
@@ -335,6 +346,8 @@ export default {
 
     save() {
       if (this.$refs.form.validate()) {
+        this.dialog = false;
+        this.isLoading = true;
         this.editedItem.nIdPlanPago = this.planPago.nIdPlanPago;
         this.editedItem.cNomPlanPago = this.planPago.cNomPlanPago;
         this.editedItem.usuSesion = { nIdUsuario: 1 };
@@ -344,10 +357,13 @@ export default {
             .put(`/api/empresa/${this.editedItem.nIdEmpresa}`, this.editedItem)
             .then(res => {
               console.log(res);
+              this.isLoading = false;
               this.close();
             })
             .catch(error => {
               console.log(error.response.data);
+              this.isLoading = false;
+              this.dialog = true;
               this.errored = true;
               this.errorMessage = error.response.data;
             });
@@ -355,13 +371,17 @@ export default {
           this.$http
             .post("/api/empresa", this.editedItem)
             .then(res => {
+              console.log(res.data);
               this.editedItem.nIdEmpresa = res.data.nIdEmpresa;
               this.editedItem.contacto = res.data.contacto;
               this.empresas.push(this.editedItem);
+              this.isLoading = false;
               this.close();
             })
             .catch(error => {
               console.log(error.response.data);
+              this.isLoading = false;
+              this.dialog = true;
               this.errored = true;
               this.errorMessage = error.response.data;
             });

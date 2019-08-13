@@ -13,14 +13,18 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <md-card v-if="isLoading">
+          <v-dialog v-model="isLoading" hide-overlay persistent width="300">
+            <v-card color="primary" dark>
+              <v-card-text>
+                Por favor, espere...
+                <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </md-card>
         <v-dialog v-model="dialog" max-width="500px" persistent>
-          <v-card v-if="isSaving">
-            <div class="text-center">
-              <v-progress-circular :size="50" color="green" indeterminate></v-progress-circular>
-              <p class="overline">Guardando...</p>
-            </div>
-          </v-card>
-          <v-card v-else>
+          <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
             </v-card-title>
@@ -98,6 +102,8 @@
                         item-value="nIdEmpresa"
                         :items="empresas"
                         label="Empresa"
+                        :rules="[v => v.nIdEmpresa != -1 || 'El campo es requerido']"
+                        required
                         return-object
                       ></v-combobox>
                     </v-flex>
@@ -108,6 +114,8 @@
                         item-value="nIdUniOpe"
                         :items="unidadesOperativasEdited"
                         label="Unidad Operativa"
+                        :rules="[v => v.nIdUniOpe != -1 || 'El campo es requerido']"
+                        required
                         return-object
                       ></v-combobox>
                     </v-flex>
@@ -118,6 +126,8 @@
                         item-value="nIdsucursal"
                         :items="sucursalesEdited"
                         label="Sucursal"
+                        :rules="[v => v.nIdsucursal != -1 || 'El campo es requerido']"
+                        required
                         return-object
                       ></v-combobox>
                     </v-flex>
@@ -128,6 +138,8 @@
                         item-value="nIdArea"
                         :items="areasEdited"
                         label="Área"
+                        :rules="[v => v.nIdArea != -1 || 'El campo es requerido']"
+                        required
                         return-object
                       ></v-combobox>
                     </v-flex>
@@ -138,6 +150,8 @@
                         item-value="nIdCargo"
                         :items="cargosEdited"
                         label="Cargo"
+                        :rules="[v => v.nIdCargo != -1 || 'El campo es requerido']"
+                        required
                         return-object
                       ></v-combobox>
                     </v-flex>
@@ -288,7 +302,7 @@ export default {
     es: es,
     errored: false,
     errorMessage: null,
-    isSaving: false,
+    isLoading: false,
     date: new Date().toISOString().substr(0, 10),
     menu: false,
     modal: false,
@@ -592,6 +606,8 @@ export default {
 
     save() {
       if (this.$refs.form.validate()) {
+        this.dialog = false;
+        this.isLoading = true;
         this.editedItem.nIdEmpresa = this.empresaEdited.nIdEmpresa;
         this.editedItem.cRazonSocial = this.empresaEdited.cRazonSocial;
         this.editedItem.nIdsucursal = this.sucursalEdited.nIdsucursal;
@@ -609,15 +625,17 @@ export default {
             .put(`/api/usuario/${this.editedItem.nIdUsuario}`, this.editedItem)
             .then(res => {
               console.log(res);
+              this.isLoading = false;
               this.close();
             })
             .catch(error => {
-              console.log(error);
+              console.log(error.response.data);
+              this.isLoading = false;
+              this.dialog = true;
               this.errored = true;
               this.errorMessage = error.response.data;
             });
         } else {
-          this.isSaving = true;
           this.$http
             .post("/api/usuario", this.editedItem)
             .then(res => {
@@ -625,13 +643,13 @@ export default {
               this.editedItem.nIdUsuario = res.data.nIdUsuario;
               this.editedItem.cCodUsu = res.data.cCodUsu;
               this.usuarios.push(this.editedItem);
-              this.dialog = false;
+              this.isLoading = false;
               this.close();
-              this.isSaving = false;
             })
             .catch(error => {
-              console.log(error);
-              this.isSaving = false;
+              console.log(error.response.data);
+              this.isLoading = false;
+              this.dialog = true;
               this.errored = true;
               this.errorMessage = error.response.data;
             });
@@ -645,19 +663,19 @@ export default {
           (row.cDNI
             .toString()
             .toLowerCase()
-            .indexOf(this.search) > -1 ||
+            .indexOf(this.search.toLowerCase()) > -1 ||
             row.cNombre
               .toString()
               .toLowerCase()
-              .indexOf(this.search) > -1 ||
+              .indexOf(this.search.toLowerCase()) > -1 ||
             row.cApePaterno
               .toString()
               .toLowerCase()
-              .indexOf(this.search) > -1 ||
+              .indexOf(this.search.toLowerCase()) > -1 ||
             row.cApeMaterno
               .toString()
               .toLowerCase()
-              .indexOf(this.search) > -1) &&
+              .indexOf(this.search.toLowerCase()) > -1) &&
           row.nIdEmpresa ==
             (this.empresa.nIdEmpresa == -1
               ? row.nIdEmpresa
@@ -682,19 +700,19 @@ export default {
           (row.cDNI
             .toString()
             .toLowerCase()
-            .indexOf(this.search) > -1 ||
+            .indexOf(this.search.toLowerCase()) > -1 ||
             row.cNombre
               .toString()
               .toLowerCase()
-              .indexOf(this.search) > -1 ||
+              .indexOf(this.search.toLowerCase()) > -1 ||
             row.cApePaterno
               .toString()
               .toLowerCase()
-              .indexOf(this.search) > -1 ||
+              .indexOf(this.search.toLowerCase()) > -1 ||
             row.cApeMaterno
               .toString()
               .toLowerCase()
-              .indexOf(this.search) > -1) &&
+              .indexOf(this.search.toLowerCase()) > -1) &&
           row.nIdEmpresa ==
             (this.empresa.nIdEmpresa == -1
               ? row.nIdEmpresa

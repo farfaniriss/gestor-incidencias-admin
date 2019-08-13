@@ -33,7 +33,7 @@
         <md-list slot="md-expand">
           <md-list-item @click="hideSidebar">
             <router-link to="/administracion/empresas" :class="{'pl-2': !showIcons}">
-              <md-icon>group_add</md-icon>Empresas
+              <md-icon>domain</md-icon>Empresas
             </router-link>
           </md-list-item>
           <!-- <md-list-item @click="hideSidebar">
@@ -48,12 +48,12 @@
           </md-list-item>
           <md-list-item @click="hideSidebar">
             <router-link to="/administracion/unidadoperativa" :class="{'pl-2': !showIcons}">
-              <md-icon>person_add</md-icon>U. Ope / Sucursal
+              <md-icon>meeting_room</md-icon>U. Ope / Sucursal
             </router-link>
           </md-list-item>
           <md-list-item @click="hideSidebar">
             <router-link to="/administracion/area" :class="{'pl-2': !showIcons}">
-              <md-icon>person_add</md-icon>Area / Cargo
+              <md-icon>school</md-icon>Area / Cargo
             </router-link>
           </md-list-item>
         </md-list>
