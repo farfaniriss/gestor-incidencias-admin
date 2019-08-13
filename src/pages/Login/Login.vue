@@ -3,7 +3,17 @@
     <div :style="headerStyle">
       <div :style="containerStyle">
         <div class="md-size-100 md-small-size-100 md-xsmall-size-100 md-medium-size-100">
-          <md-card class="md-card-login" :class="{ 'md-card-hidden': cardHidden }">
+          <md-card v-if="isLoading">
+            <v-dialog v-model="dialog" hide-overlay persistent width="300">
+              <v-card color="primary" dark>
+                <v-card-text>
+                  Por favor, espere...
+                  <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+          </md-card>
+          <md-card v-else class="md-card-login" :class="{ 'md-card-hidden': cardHidden }">
             <md-card-header class="md-card-header-green">
               <h4 class="card-title">JAAMTECH</h4>
             </md-card-header>
@@ -58,6 +68,8 @@ export default {
       valid: true,
       errored: false,
       errorMessage: null,
+      isLoading: false,
+      dialog: true,
       campoRequerido: [v => !!v || "El campo es requerido"],
       firstname: null,
       email: null,
@@ -98,12 +110,21 @@ export default {
       };
     }
   },
+  watch: {
+    dialog(val) {
+      if (!val) return;
+
+      setTimeout(() => (this.dialog = false), 4000);
+    }
+  },
   methods: {
     showCard: function() {
       this.cardHidden = false;
     },
     login() {
       if (this.$refs.form.validate()) {
+        this.isLoading = true;
+        this.dialog = true;
         let user = {
           cEmail: this.email,
           cContrasenia: this.password
@@ -119,16 +140,19 @@ export default {
               this.$router.push(
                 this.$router.history.current.query.redirect || "/"
               );
+              this.isLoading = false;
             } else {
               this.$router.push({
                 name: "cambioClave",
                 params: { email: this.email }
               });
+              this.isLoading = false;
             }
           })
           .catch(error => {
             this.errored = true;
             this.errorMessage = error.response.data;
+            this.isLoading = false;
           });
       }
     }

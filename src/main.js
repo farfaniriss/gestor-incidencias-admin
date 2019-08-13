@@ -72,6 +72,21 @@ import "./registerServiceWorker";
 //   linkExactActiveClass: "nav-item active"
 // });
 
+Vue.filter('formatDate', function (value) {
+  if (value) {
+      let valueDate = new Date(value);
+      return  appendLeadingZeroes(valueDate.getDate()) + "/" + appendLeadingZeroes(valueDate.getMonth() + 1) + "/" + valueDate.getFullYear();
+  }
+  return value;
+});
+
+function appendLeadingZeroes(n) {
+  if (n < 9) {
+      return "0" + n;
+  }
+  return n
+}
+
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(IncidenciaHub);
