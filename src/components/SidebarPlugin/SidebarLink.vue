@@ -56,6 +56,11 @@
               <md-icon>school</md-icon>Area / Cargo
             </router-link>
           </md-list-item>
+          <md-list-item @click="hideSidebar">
+            <router-link to="/administracion/planpago" :class="{'pl-2': !showIcons}">
+              <md-icon>payment</md-icon>Plan de pago
+            </router-link>
+          </md-list-item>
         </md-list>
       </md-list-item>
     </md-list>

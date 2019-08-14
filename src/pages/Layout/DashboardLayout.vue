@@ -49,7 +49,7 @@
 
 .toggle-max {
   padding-top: 0.5rem !important;
-  padding-left: 10rem !important;
+  padding-left: 12rem !important;
   position: fixed;
   z-index: 10;
 }

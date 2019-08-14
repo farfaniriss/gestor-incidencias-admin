@@ -10,6 +10,7 @@ import Login from "@/pages/Login/Login.vue";
 import CambioClave from "@/pages/CambioClave/CambioClave.vue";
 import UnidadOperativaSucursal from "@/pages/UnidadOperativaSucursal/UnidadOperativaSucursal.vue";
 import AreaCargo from "@/pages/AreaCargo/AreaCargo.vue";
+import PlanPago from "@/pages/PlanPago/PlanPago.vue";
 import { TokenService } from "../storage.service";
 
 Vue.use(Router);
@@ -74,6 +75,11 @@ const router = new Router({
           path: "/administracion/area",
           name: "Administracion > Areas / Cargos",
           component: AreaCargo
+        },
+        {
+          path: "/administracion/planpago",
+          name: "Administracion > Plan de pago",
+          component: PlanPago
         }
       ]
     },
