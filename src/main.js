@@ -53,6 +53,7 @@ import "vuesax/dist/vuesax.css"; //Vuesax styles
 
 // router setup
 import router from "./routes/routes";
+import store from './store/store';
 
 // Plugins
 import GlobalComponents from "./globalComponents";
@@ -110,6 +111,7 @@ new Vue({
   el: "#app",
   render: h => h(App),
   router,
+  store,
   data: {
     Chartist: Chartist
   }

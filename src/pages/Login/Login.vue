@@ -57,6 +57,7 @@
 <script>
 import { LoginCard } from "@/components";
 import { TokenService } from "../../storage.service";
+import { store } from "../../store/store";
 
 export default {
   components: {
@@ -132,10 +133,14 @@ export default {
         this.$http
           .post(`/api/sesion/iniciar`, user)
           .then(res => {
-            console.log(res.data.cToken);
             TokenService.saveToken(res.data.cToken);
+            console.log(res.data);
+            store.commit({
+              type: "setUser",
+              usuario: res.data
+            });
+            console.log(store.state.user);
             if (res.data.bCambioClave) {
-              //this.$router.push('/')
               // Redirect the user to the page he first tried to visit or to the home view
               this.$router.push(
                 this.$router.history.current.query.redirect || "/"
@@ -150,6 +155,8 @@ export default {
             }
           })
           .catch(error => {
+            console.log(error);
+            console.log(error.response);
             this.errored = true;
             this.errorMessage = error.response.data;
             this.isLoading = false;
