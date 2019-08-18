@@ -104,6 +104,7 @@
                         label="Empresa"
                         :rules="[v => v.nIdEmpresa != -1 || 'El campo es requerido']"
                         required
+                        :disabled="disabledEmpresa"
                         return-object
                       ></v-combobox>
                     </v-flex>
@@ -191,6 +192,7 @@
                     item-value="nIdEmpresa"
                     :items="empresas"
                     label="Empresa"
+                    :disabled="disabledEmpresa"
                     return-object
                   ></v-combobox>
                 </v-flex>
@@ -328,6 +330,8 @@ export default {
       { text: "Cargo", value: "cNomCargo" },
       { text: "Acciones", value: "cDNI", sortable: false }
     ],
+    user: null,
+    disabledEmpresa: false,
     usuarios: [],
     empresas: [],
     unidadesOperativas: [],
@@ -744,6 +748,22 @@ export default {
       .get("/api/empresa")
       .then(res => {
         this.empresas = res.data;
+        var retrievedObject = localStorage.getItem("user");
+        this.user = JSON.parse(retrievedObject);
+        if (this.user.nIdNivel > 1) {
+          let index = this.empresas.findIndex(
+            x => x.nIdEmpresa == this.user.nIdEmpresa
+          );
+          this.empresa = {
+            nIdEmpresa: this.user.nIdEmpresa,
+            cRazonSocial: this.empresas[index].cRazonSocial
+          };
+          this.empresaEdited = {
+            nIdEmpresa: this.user.nIdEmpresa,
+            cRazonSocial: this.empresas[index].cRazonSocial
+          };
+          this.disabledEmpresa = true;
+        }
       })
       .catch(error => console.log(error));
   }

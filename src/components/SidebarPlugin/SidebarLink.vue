@@ -31,17 +31,13 @@
         <md-icon>supervisor_account</md-icon>
         <p class="white-text">Administración</p>
         <md-list slot="md-expand">
-          <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/empresas" :class="{'pl-2': !showIcons}">
-              <md-icon>domain</md-icon>Empresas
+          <md-list-item v-for="(permiso) in permisos" :key="permisosReload" @click="hideSidebar">
+            <router-link :to="permiso.cRuta" :class="{'pl-2': !showIcons}">
+              <md-icon>{{permiso.cIcon}}</md-icon>
+              {{permiso.cMenuNombre}}
             </router-link>
           </md-list-item>
           <!-- <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/perfil" :class="{'pl-2': !showIcons}">
-              <md-icon>group_add</md-icon>Perfil
-            </router-link>
-          </md-list-item>-->
-          <md-list-item @click="hideSidebar">
             <router-link to="/administracion/usuarios" :class="{'pl-2': !showIcons}">
               <md-icon>person_add</md-icon>Usuario
             </router-link>
@@ -60,7 +56,7 @@
             <router-link to="/administracion/planpago" :class="{'pl-2': !showIcons}">
               <md-icon>payment</md-icon>Plan de pago
             </router-link>
-          </md-list-item>
+          </md-list-item>-->
         </md-list>
       </md-list-item>
     </md-list>
@@ -83,8 +79,17 @@ export default {
     return {
       expandSingle: true,
       expandConfig: false,
-      expandAdmin: false
+      expandAdmin: false,
+      permisos: [],
+      permisosReload: 0
     };
+  },
+  mounted() {
+    var retrievedObject = localStorage.getItem("user");
+    var user = JSON.parse(retrievedObject);
+    this.permisos = user.permisos;
+    console.log(this.permisos);
+    this.permisosReload++;
   },
   methods: {
     hideSidebar() {

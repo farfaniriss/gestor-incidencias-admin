@@ -134,12 +134,8 @@ export default {
           .post(`/api/sesion/iniciar`, user)
           .then(res => {
             TokenService.saveToken(res.data.cToken);
+            localStorage.setItem("user", JSON.stringify(res.data));
             console.log(res.data);
-            store.commit({
-              type: "setUser",
-              usuario: res.data
-            });
-            console.log(store.state.user);
             if (res.data.bCambioClave) {
               // Redirect the user to the page he first tried to visit or to the home view
               this.$router.push(

@@ -106,6 +106,7 @@
                 item-value="nIdEmpresa"
                 :items="empresas"
                 label="Empresa"
+                :disabled="disabledEmpresa"
                 return-object
               ></v-combobox>
             </v-card-title>
@@ -202,6 +203,8 @@ export default {
       { text: "Cargo", value: "cNomCargo" },
       { text: "Acciones", value: "cNomCargo", sortable: false }
     ],
+    user: null,
+    disabledEmpresa: false,
     areas: [],
     empresas: [],
     editedIndexArea: -1,
@@ -428,6 +431,18 @@ export default {
       .get("/api/empresa/empresas")
       .then(res => {
         this.empresas = res.data;
+        var retrievedObject = localStorage.getItem("user");
+        this.user = JSON.parse(retrievedObject);
+        if (this.user.nIdNivel > 1) {
+          let index = this.empresas.findIndex(
+            x => x.nIdEmpresa == this.user.nIdEmpresa
+          );
+          this.empresa = {
+            nIdEmpresa: this.user.nIdEmpresa,
+            cRazonSocial: this.empresas[index].cRazonSocial
+          };
+          this.disabledEmpresa = true;
+        }
       })
       .catch(error => console.log(error));
   },

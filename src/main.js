@@ -53,7 +53,7 @@ import "vuesax/dist/vuesax.css"; //Vuesax styles
 
 // router setup
 import router from "./routes/routes";
-import store from './store/store';
+import store from "./store/store";
 
 // Plugins
 import GlobalComponents from "./globalComponents";
@@ -73,19 +73,25 @@ import "./registerServiceWorker";
 //   linkExactActiveClass: "nav-item active"
 // });
 
-Vue.filter('formatDate', function (value) {
+Vue.filter("formatDate", function(value) {
   if (value) {
-      let valueDate = new Date(value);
-      return  appendLeadingZeroes(valueDate.getDate()) + "/" + appendLeadingZeroes(valueDate.getMonth() + 1) + "/" + valueDate.getFullYear();
+    let valueDate = new Date(value);
+    return (
+      appendLeadingZeroes(valueDate.getDate()) +
+      "/" +
+      appendLeadingZeroes(valueDate.getMonth() + 1) +
+      "/" +
+      valueDate.getFullYear()
+    );
   }
   return value;
 });
 
 function appendLeadingZeroes(n) {
   if (n < 9) {
-      return "0" + n;
+    return "0" + n;
   }
-  return n
+  return n;
 }
 
 Vue.prototype.$Chartist = Chartist;
