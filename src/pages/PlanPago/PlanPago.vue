@@ -51,12 +51,52 @@
                     <v-flex xs12 sm12 md12>
                       <v-text-field
                         v-model="editedItem.nNroMaxUsu"
-                        :rules="nNroMaxUsuRules"
+                        :rules="numericRules"
                         type="number"
                         class="inputNumber"
                         label="Número máximo de usuarios"
                         required
                       ></v-text-field>
+                    </v-flex>
+                    <v-flex xs6 sm6 md6>
+                      <v-text-field
+                        v-model="editedItem.nNroFrecPago"
+                        label="Tiempo intervalo de pago"
+                        type="number"
+                        class="inputNumber"
+                        :rules="numericRules"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs6 sm6 md6>
+                      <v-combobox
+                        v-model="frecuenciaPago"
+                        item-text="cNomCortoFrec"
+                        item-value="nIdFrecuencia"
+                        :items="frecuencias"
+                        label="Frecuencia de pago"
+                        return-object
+                      ></v-combobox>
+                    </v-flex>
+                    <v-flex xs6 sm6 md6>
+                      <v-text-field
+                        v-model="editedItem.nNroFrecAlerta"
+                        label="Tiempo intervalo de alerta"
+                        type="number"
+                        class="inputNumber"
+                        :rules="numericRules"
+                        required
+                      ></v-text-field>
+                    </v-flex>
+                    <v-flex xs6 sm6 md6>
+                      <v-combobox
+                        v-model="frecuenciaAlerta"
+                        item-text="cNomCortoFrec"
+                        item-value="nIdFrecuencia"
+                        :items="frecuencias"
+                        label="Frecuencia de alerta"
+                        return-object
+                      ></v-combobox>
                     </v-flex>
                     <v-flex xs12 sm12 md12>
                       <v-text-field
@@ -120,6 +160,10 @@
                 <td class="text-xs-left">{{ props.item.cNomPlanPago }}</td>
                 <td class="text-xs-left">{{ props.item.cDescPlanPago }}</td>
                 <td class="text-xs-left">{{ props.item.nNroMaxUsu }}</td>
+                <td class="text-xs-left">{{ props.item.nNroFrecPago }}</td>
+                <td class="text-xs-left">{{ props.item.cNomFrecPago }}</td>
+                <td class="text-xs-left">{{ props.item.nNroFrecAlerta }}</td>
+                <td class="text-xs-left">{{ props.item.cNomFrecAlerta }}</td>
                 <td class="text-xs-left">{{ props.item.nPrecio }}</td>
                 <td class="justify-start layout">
                   <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
@@ -156,11 +200,18 @@ export default {
     headers: [
       { text: "Nombre del plan", value: "cNomPlanPago" },
       { text: "Descripción del plan", value: "cDescPlanPago" },
-      { text: "Número máximo de usuarios", value: "nNroMaxUsu" },
+      { text: "Num. max. usuarios", value: "nNroMaxUsu" },
+      { text: "Num Intervalo Pago", value: "nNroFrecPago" },
+      { text: "Frecuencia Pago", value: "cNomFrecPago" },
+      { text: "Num Intervalo Alerta", value: "nNroFrecAlerta" },
+      { text: "Frecuencia Alerta", value: "cNomFrecAlerta" },
       { text: "Precio", value: "nPrecio" },
       { text: "Acciones", value: "nIdPlanPago", sortable: false }
     ],
     planesPagos: [],
+    frecuencias: [],
+    frecuenciaAlerta: null,
+    frecuenciaPago: null,
     editedIndex: -1,
     itemToDelete: null,
     editedItem: {
@@ -169,6 +220,12 @@ export default {
       cDescPlanPago: "",
       nNroMaxUsu: 0,
       nPrecio: 0,
+      nIdFrecPago: -1,
+      cNomFrecPago: "",
+      nNroFrecPago: 0,
+      nIdFrecAlerta: 0,
+      cNomFrecAlerta: "",
+      nNroFrecAlerta: 0,
       nIdUsuCre: -1
     },
     defaultItem: {
@@ -177,6 +234,12 @@ export default {
       cDescPlanPago: "",
       nNroMaxUsu: 0,
       nPrecio: 0,
+      nIdFrecPago: -1,
+      cNomFrecPago: "",
+      nNroFrecPago: 0,
+      nIdFrecAlerta: 0,
+      cNomFrecAlerta: "",
+      nNroFrecAlerta: 0,
       nIdUsuCre: -1
     },
     precioRules: [
@@ -185,7 +248,7 @@ export default {
         /\d+(\.\d{1,2})?/.test(v) ||
         "Campo sólo puede contener números o decimales"
     ],
-    nNroMaxUsuRules: [
+    numericRules: [
       v => !!v || "El campo es requerido",
       v => /^\d*$/.test(v) || "Campo sólo puede contener números"
     ],
@@ -200,6 +263,14 @@ export default {
     editItem(item) {
       this.editedIndex = this.planesPagos.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      this.frecuenciaPago = {
+        nIdFrecuencia: this.editedItem.nIdFrecPago,
+        cNomCortoFrec: this.editedItem.cNomFrecPago
+      };
+      this.frecuenciaAlerta = {
+        nIdFrecuencia: this.editedItem.nIdFrecAlerta,
+        cNomCortoFrec: this.editedItem.cNomFrecAlerta
+      };
       this.dialog = true;
     },
 
@@ -239,6 +310,10 @@ export default {
         this.dialog = false;
         this.isLoading = true;
         this.editedItem.nIdUsuCre = 1;
+        this.editedItem.nIdFrecPago = this.frecuenciaPago.nIdFrecuencia;
+        this.editedItem.cNomFrecPago = this.frecuenciaPago.cNomCortoFrec;
+        this.editedItem.nIdFrecAlerta = this.frecuenciaAlerta.nIdFrecuencia;
+        this.editedItem.cNomFrecAlerta = this.frecuenciaAlerta.cNomCortoFrec;
         if (this.editedIndex > -1) {
           Object.assign(this.planesPagos[this.editedIndex], this.editedItem);
           this.$http
@@ -259,6 +334,7 @@ export default {
               this.errorMessage = error.response.data;
             });
         } else {
+          console.log(this.editedItem);
           this.$http
             .post("/api/planpago", this.editedItem)
             .then(res => {
@@ -303,6 +379,13 @@ export default {
       .get("/api/planPago")
       .then(res => {
         this.planesPagos = res.data;
+      })
+      .catch(error => console.log(error));
+
+    this.$http
+      .get("/api/frecuencia")
+      .then(res => {
+        this.frecuencias = res.data;
       })
       .catch(error => console.log(error));
   }
