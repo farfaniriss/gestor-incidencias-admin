@@ -30,6 +30,7 @@
                     v-model="password"
                     label="Password"
                     required
+                    @keyup.enter="login"
                     :rules="campoRequerido"
                   ></v-text-field>
                 </md-field>
