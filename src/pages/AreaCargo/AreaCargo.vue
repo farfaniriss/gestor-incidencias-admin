@@ -398,9 +398,7 @@ export default {
           this.$http
             .post("/api/cargo", this.editedItemCargo)
             .then(res => {
-              console.log(res.data.nIdCargo);
               this.editedItemCargo.nIdCargo = res.data.nIdCargo;
-              console.log(this.areas[nodeIndex].cargos);
               if (
                 this.areas[nodeIndex].cargos == null ||
                 this.areas[nodeIndex].cargos == undefined

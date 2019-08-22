@@ -31,6 +31,7 @@
                     label="Password"
                     required
                     @keyup.enter="login"
+                    type="password"
                     :rules="campoRequerido"
                   ></v-text-field>
                 </md-field>

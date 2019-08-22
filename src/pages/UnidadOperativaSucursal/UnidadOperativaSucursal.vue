@@ -153,22 +153,24 @@
                       @click.stop="nuevaSucursal(props.item.nIdUniOpe)"
                     >Nueva Sucursal</v-btn>
                   </v-toolbar>
-                  <v-data-table
-                    :headers="headersSucursal"
-                    :items="props.item.sucursales"
-                    :rows-per-page-items="rowsPerPageItems"
-                    no-data-text="''"
-                    rows-per-page-text="Filas por página"
-                  >
-                    <template v-slot:items="props">
-                      <td class="text-xs-left">{{ props.item.cNomSurcursal }}</td>
-                      <td class="text-xs-left">{{ props.item.cDescripcion }}</td>
-                      <td class="justify-start layout">
-                        <v-icon small class="mr-2" @click="editItemSucursal(props.item)">edit</v-icon>
-                        <v-icon small @click.stop="deleteItemSucursal(props.item)">delete</v-icon>
-                      </td>
-                    </template>
-                  </v-data-table>
+                  <div :key="sucursalKey">
+                    <v-data-table
+                      :headers="headersSucursal"
+                      :items="props.item.sucursales"
+                      :rows-per-page-items="rowsPerPageItems"
+                      no-data-text="''"
+                      rows-per-page-text="Filas por página"
+                    >
+                      <template v-slot:items="props">
+                        <td class="text-xs-left">{{ props.item.cNomSurcursal }}</td>
+                        <td class="text-xs-left">{{ props.item.cDescripcion }}</td>
+                        <td class="justify-start layout">
+                          <v-icon small class="mr-2" @click="editItemSucursal(props.item)">edit</v-icon>
+                          <v-icon small @click.stop="deleteItemSucursal(props.item)">delete</v-icon>
+                        </td>
+                      </template>
+                    </v-data-table>
+                  </div>
                 </v-card>
               </template>
             </v-data-table>
@@ -218,6 +220,7 @@ export default {
     empresas: [],
     editedIndexUniOpe: -1,
     editedIndexSucursal: -1,
+    sucursalKey: 1,
     itemToDeleteUniOpe: null,
     itemToDeleteSucursal: null,
     editedItemUniOpe: {
@@ -436,6 +439,7 @@ export default {
               this.unidadesOperativas[nodeIndex].sucursales.push(
                 this.editedItemSucursal
               );
+              this.sucursalKey++;
               this.closeSucursal();
             })
             .catch(error => {

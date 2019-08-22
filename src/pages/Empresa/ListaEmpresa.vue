@@ -55,7 +55,7 @@
                     <v-flex xs12 sm12 md12>
                       <v-combobox
                         v-model="planPago"
-                        item-text="cNomPlanPago"
+                        item-text="cNomDescPlan"
                         item-value="nIdPlanPago"
                         :items="planesPagos"
                         label="Plan de pago"
@@ -176,7 +176,7 @@
               <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.cRuc }}</td>
                 <td class="text-xs-left">{{ props.item.cRazonSocial }}</td>
-                <td class="text-xs-left">{{ props.item.cNomPlanPago }}</td>
+                <td class="text-xs-left">{{ props.item.cNomDescPlan }}</td>
                 <td class="text-xs-left">{{ props.item.contacto.cDNI }}</td>
                 <td class="text-xs-left">{{ props.item.contacto.nombreCompleto }}</td>
                 <td class="text-xs-left">{{ props.item.contacto.cEmail }}</td>
@@ -217,7 +217,7 @@ export default {
     headers: [
       { text: "Ruc", value: "cRuc" },
       { text: "Razon social", value: "cRazonSocial" },
-      { text: "Plan Pago", value: "cNomPlanPago" },
+      { text: "Plan Pago", value: "cNomDescPlan" },
       { text: "DNI Contacto", value: "contacto.cDNI" },
       { text: "Nombre Contacto", value: "contacto.nombreCompleto" },
       { text: "Email Contacto", value: "contacto.cEmail" },
@@ -231,7 +231,7 @@ export default {
     itemToDelete: null,
     planPago: {
       nIdPlanPago: -1,
-      cNomPlanPago: ""
+      cNomDescPlan: ""
     },
     editedItem: {
       nIdEmpresa: 0,
@@ -308,7 +308,7 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.planPago = {
         nIdPlanPago: item.nIdPlanPago,
-        cNomPlanPago: item.cNomPlanPago
+        cNomDescPlan: item.cNomDescPlan
       };
       this.dialog = true;
     },
@@ -349,7 +349,7 @@ export default {
         this.dialog = false;
         this.isLoading = true;
         this.editedItem.nIdPlanPago = this.planPago.nIdPlanPago;
-        this.editedItem.cNomPlanPago = this.planPago.cNomPlanPago;
+        this.editedItem.cNomDescPlan = this.planPago.cNomDescPlan;
         this.editedItem.usuSesion = { nIdUsuario: 1 };
         if (this.editedIndex > -1) {
           Object.assign(this.empresas[this.editedIndex], this.editedItem);
