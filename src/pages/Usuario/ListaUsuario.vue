@@ -156,6 +156,13 @@
                         return-object
                       ></v-combobox>
                     </v-flex>
+                    <v-flex>
+                      <v-checkbox v-model="editedItem.bActivo" color="green">
+                        <template v-slot:label>
+                          <div @click.stop>Activo</div>
+                        </template>
+                      </v-checkbox>
+                    </v-flex>
                   </v-layout>
                 </v-container>
               </v-form>
@@ -254,12 +261,20 @@
               :filter="searchData"
               :custom-filter="filterData"
               :rows-per-page-items="rowsPerPageItems"
+              class="elevation-1"
               no-data-text="''"
               rows-per-page-text="Filas por página"
             >
+              <template slot="headerCell" slot-scope="props">
+                <v-tooltip bottom>
+                  <span slot="activator">{{ props.header.text }}</span>
+                  <span>{{ props.header.text }}</span>
+                </v-tooltip>
+              </template>
               <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.cDNI }}</td>
                 <td class="text-xs-left">{{ props.item.cCodUsu }}</td>
+                <td class="text-xs-left">{{ props.item.cNomNivel }}</td>
                 <td class="text-xs-left">{{ props.item.cNombre }}</td>
                 <td class="text-xs-left">{{ props.item.cApePaterno }}</td>
                 <td class="text-xs-left">{{ props.item.cApeMaterno }}</td>
@@ -271,6 +286,7 @@
                 <td class="text-xs-left">{{ props.item.cNomSurcursal }}</td>
                 <td class="text-xs-left">{{ props.item.cNomArea }}</td>
                 <td class="text-xs-left">{{ props.item.cNomCargo }}</td>
+                <td class="text-xs-left">{{ props.item.bActivo ? "Activo" : "Inactivo" }}</td>
                 <td class="justify-start layout">
                   <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
                   <v-icon small @click.stop="deleteItem(props.item)">delete</v-icon>
@@ -315,20 +331,22 @@ export default {
     search: "",
     rowsPerPageItems: [10, 20, 30, 40],
     headers: [
-      { text: "DNI", value: "cDNI" },
-      { text: "Username", value: "cCodUsu" },
-      { text: "Nombre", value: "cNombre" },
-      { text: "Apellido paterno", value: "cApePaterno" },
-      { text: "Apellido materno", value: "cApeMaterno" },
-      { text: "Fecha de nacimiento", value: "dFecNacimiento" },
-      { text: "Email", value: "cEmail" },
-      { text: "Celular", value: "cCelular" },
-      { text: "Empresa", value: "cRazonSocial" },
-      { text: "Uni. Operativa", value: "cNomUniOpe" },
-      { text: "Sucursal", value: "cNomSurcursal" },
-      { text: "Area", value: "cNomArea" },
-      { text: "Cargo", value: "cNomCargo" },
-      { text: "Acciones", value: "cDNI", sortable: false }
+      { text: "DNI", value: "cDNI", width: "1%" },
+      { text: "Username", value: "cCodUsu", width: "1%" },
+      { text: "Tipo de usuario", value: "cNomNivel", width: "1%" },
+      { text: "Nombre", value: "cNombre", width: "1%" },
+      { text: "Apellido paterno", value: "cApePaterno", width: "1%" },
+      { text: "Apellido materno", value: "cApeMaterno", width: "1%" },
+      { text: "Fecha de nacimiento", value: "dFecNacimiento", width: "1%" },
+      { text: "Email", value: "cEmail", width: "1%" },
+      { text: "Celular", value: "cCelular", width: "1%" },
+      { text: "Empresa", value: "cRazonSocial", width: "1%" },
+      { text: "Uni. Operativa", value: "cNomUniOpe", width: "1%" },
+      { text: "Sucursal", value: "cNomSurcursal", width: "1%" },
+      { text: "Area", value: "cNomArea", width: "1%" },
+      { text: "Cargo", value: "cNomCargo", width: "1%" },
+      { text: "Activo", value: "bActivo", width: "1%" },
+      { text: "Acciones", value: "cDNI", sortable: false, width: "1%" }
     ],
     user: null,
     disabledEmpresa: false,
@@ -792,5 +810,13 @@ export default {
 
 .v-menu__content--fixed {
   position: absolute !important;
+}
+
+table {
+  border-radius: 2px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  max-width: 100%;
 }
 </style>

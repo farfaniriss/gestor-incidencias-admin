@@ -1,5 +1,16 @@
 <template>
   <div>
+    <v-toolbar
+      height="100px"
+      style="display: flex; align-items: center; justify-content: center;"
+      flat
+      absolute
+      color="#474A4F"
+    >
+      <v-container align-content-center justify-center>
+        <img :src="header" width="250" />
+      </v-container>
+    </v-toolbar>
     <div :style="headerStyle">
       <div :style="containerStyle">
         <div class="md-size-100 md-small-size-100 md-xsmall-size-100 md-medium-size-100">
@@ -15,20 +26,25 @@
           </md-card>
           <md-card v-else class="md-card-login" :class="{ 'md-card-hidden': cardHidden }">
             <md-card-header class="md-card-header-green">
-              <h4 class="card-title">JAAMTECH</h4>
+              <h4 class="card-title">Iniciar sesión en su cuenta</h4>
             </md-card-header>
             <md-card-content>
-              <p class="description">Login</p>
+              <!-- <p class="description">Iniciar sesión en su cuenta</p> -->
               <v-form v-model="valid" ref="form" lazy-validation>
                 <md-field class="md-form-group">
                   <md-icon>email</md-icon>
-                  <v-text-field v-model="email" label="Email" required :rules="campoRequerido"></v-text-field>
+                  <v-text-field
+                    v-model="email"
+                    label="Correo electrónico"
+                    required
+                    :rules="campoRequerido"
+                  ></v-text-field>
                 </md-field>
                 <md-field class="md-form-group">
                   <md-icon>lock_outline</md-icon>
                   <v-text-field
                     v-model="password"
-                    label="Password"
+                    label="Contraseña"
                     required
                     @keyup.enter="login"
                     type="password"
@@ -45,14 +61,24 @@
             <md-card-actions>
               <md-button
                 class="md-simple md-success md-lg"
-                @click="login"
-                :disabled="!valid"
-              >Ingresar</md-button>
+                @click="olvidoClave"
+              >¿Olvidaste tu contraseña?</md-button>
+              <v-btn small depressed color="white" @click="login" :disabled="!valid">Ingresar</v-btn>
             </md-card-actions>
           </md-card>
         </div>
       </div>
     </div>
+    <v-footer
+      absolute
+      style="display: flex; align-items: center; justify-content: center;"
+      height="100px"
+      color="#474A4F"
+    >
+      <div
+        style="color: white; font-weight: 100;"
+      >Copyright &copy; {{ new Date().getFullYear() }} — Jammtech. Todos los derechos reservados.</div>
+    </v-footer>
   </div>
 </template>
 
@@ -94,7 +120,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/profile_city.jpg")
+      default: require("@/assets/img/logo_login.png")
     }
   },
   beforeMount() {
@@ -103,7 +129,7 @@ export default {
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`,
+        backgroundColor: "#7AC043",
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -160,6 +186,9 @@ export default {
             this.isLoading = false;
           });
       }
+    },
+    olvidoClave() {
+      this.$router.push("/olvidoClave");
     }
   }
 };
@@ -177,5 +206,9 @@ export default {
 }
 .md-field:not(.md-disabled):after {
   display: none;
+}
+
+.v-btn__content {
+  color: white !important;
 }
 </style>

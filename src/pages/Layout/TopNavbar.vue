@@ -31,16 +31,15 @@
                   <li>
                     <a href="#">Jhon Whitman respondio a tu comentario</a>
                   </li>
-                  <li>
-                    <a href="#">La incidencia XYZ ha sido cerrada</a>
-                  </li>
                 </ul>
               </drop-down>
             </md-list-item>
-
+            <md-list-item>Bienvenido {{ user.cNombre }}</md-list-item>
+            <md-list-item>Empresa autorizada: {{ user.cRazonSocial }}</md-list-item>
             <md-list-item href="#/administracion/usuario">
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Perfil</p>
+              {{ user.cNomNivel }}
             </md-list-item>
             <md-list-item @click="logout">
               <i class="material-icons">exit_to_app</i>
@@ -61,16 +60,7 @@ export default {
   data() {
     return {
       selectedEmployee: null,
-      employees: [
-        "Jim Halpert",
-        "Dwight Schrute",
-        "Michael Scott",
-        "Pam Beesly",
-        "Angela Martin",
-        "Kelly Kapoor",
-        "Ryan Howard",
-        "Kevin Malone"
-      ]
+      user: null
     };
   },
   methods: {
@@ -81,6 +71,11 @@ export default {
       TokenService.removeToken();
       router.push("/login");
     }
+  },
+  mounted() {
+    var retrievedObject = localStorage.getItem("user");
+    this.user = JSON.parse(retrievedObject);
+    console.log(this.user);
   }
 };
 </script>

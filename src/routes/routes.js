@@ -8,6 +8,7 @@ import RegistroPerfil from "@/pages/Perfil/RegistroPerfil.vue";
 import ListaUsuario from "@/pages/Usuario/ListaUsuario.vue";
 import Login from "@/pages/Login/Login.vue";
 import CambioClave from "@/pages/CambioClave/CambioClave.vue";
+import OlvidoClave from "@/pages/OlvidoClave/OlvidoClave.vue";
 import UnidadOperativaSucursal from "@/pages/UnidadOperativaSucursal/UnidadOperativaSucursal.vue";
 import AreaCargo from "@/pages/AreaCargo/AreaCargo.vue";
 import PlanPago from "@/pages/PlanPago/PlanPago.vue";
@@ -97,9 +98,15 @@ const router = new Router({
       name: "cambioClave",
       component: CambioClave,
       props: true
-      // meta: {
-      //   guest: true
-      // }
+    },
+    {
+      path: "/olvidoClave",
+      name: "olvidoClave",
+      component: OlvidoClave,
+      meta: {
+        public: true, // Allow access to even if not logged in
+        onlyWhenLoggedOut: true
+      }
     }
   ]
 });
