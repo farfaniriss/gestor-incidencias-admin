@@ -1,5 +1,5 @@
 <template>
-  <md-toolbar>
+  <md-toolbar style="background-color: #7ac043 !important;">
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">
         <h3 class="md-title">{{ $route.name }}</h3>
@@ -81,17 +81,14 @@ export default {
 </script>
 
 <style lang="css">
-.md-toolbar {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
-}
 .fixed-breadcrumb {
   position: inherit;
 }
 
 .md-toolbar {
   padding-left: 20px !important;
-  color: #434c52 !important;
+  background-color: #7ac043 !important;
+  box-shadow: none !important;
 }
 
 @media screen and (max-width: 991px) {

@@ -4,9 +4,9 @@
   border-radius: 3px;
   position: fixed !important;
   width: 100% !important;
+  background-color: #7ac043 !important;
 
   &.md-transparent {
-    background-color: transparent !important;
     box-shadow: none;
 
     .md-title,
@@ -21,11 +21,11 @@
   .notification {
     position: absolute;
     top: 5px;
-    border: 1px solid #FFF;
+    border: 1px solid #fff;
     right: 10px;
     font-size: 9px;
     background: #f44336;
-    color: #FFFFFF;
+    color: #ffffff;
     min-width: 20px;
     padding: 0px 5px;
     height: 20px;
@@ -37,26 +37,23 @@
   }
 
   .navbar-nav {
-    >li>.dropdown-menu {
+    > li > .dropdown-menu {
       margin-top: -20px;
     }
 
-    >li.open>.dropdown-menu {
+    > li.open > .dropdown-menu {
       margin-top: 0;
     }
 
-    >.active>a {
-
+    > .active > a {
       &,
       &:hover,
       &:focus {
         color: inherit;
-        background-color: rgba(255, 255, 255, 0.1);
       }
     }
 
-    >.disabled>a {
-
+    > .disabled > a {
       &,
       &:hover,
       &:focus {
@@ -75,7 +72,6 @@
       }
     }
   }
-
 
   // default color for dropdown
   @include dropdown-colors($brand-primary);
@@ -139,11 +135,11 @@
   .notification {
     position: absolute;
     top: 0px;
-    border: 1px solid #FFF;
+    border: 1px solid #fff;
     right: 7px;
     font-size: 9px;
     background: #f44336;
-    color: #FFFFFF;
+    color: #ffffff;
     min-width: 20px;
     padding: 0px 5px;
     height: 20px;
@@ -181,11 +177,10 @@
       display: block;
       width: 22px;
       height: 2px;
-      background-color: inherit;
       border: 1px solid;
       border-radius: 1px;
 
-      &+.icon-bar {
+      & + .icon-bar {
         margin-top: 4px;
       }
     }
@@ -200,13 +195,13 @@
     color: inherit !important;
     background-color: transparent !important;
 
-    &:hover .md-list-item>a,
-    &:focus .md-list-item>a,
-    &>a:hover {
+    &:hover .md-list-item > a,
+    &:focus .md-list-item > a,
+    & > a:hover {
       background-color: transparent !important;
     }
 
-    .md-list-item>a:not(:last-child) {
+    .md-list-item > a:not(:last-child) {
       margin-right: 5px;
     }
   }
@@ -251,11 +246,6 @@
   }
 }
 
-
-
-
-
-
 .md-list-item a {
   color: inherit !important;
   padding-top: 15px;
@@ -277,7 +267,6 @@
     color: inherit;
     background-color: transparent;
   }
-
 
   .material-icons,
   .fa {

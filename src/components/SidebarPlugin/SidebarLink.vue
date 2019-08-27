@@ -3,10 +3,10 @@
     <md-list class="nav" md-expand-single="true">
       <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
         <router-link to="/inicio" class="menu-router-link">
-          <md-icon>dashboard</md-icon>Inicio
+          <md-icon>border_all</md-icon>Inicio
         </router-link>
       </md-list-item>
-      <md-list-item
+      <!-- <md-list-item
         md-expand
         :md-expanded.sync="expandConfig"
         :class="{'hidden-text-menu': showIcons}"
@@ -15,13 +15,13 @@
         <md-icon>settings</md-icon>
         <p class="white-text">Configuración</p>
         <md-list slot="md-expand">
-          <!-- <md-list-item @click="hideSidebar">
+           <md-list-item @click="hideSidebar">
             <router-link to="/configuracion/tablas" :class="{'pl-2': !showIcons}">
               <md-icon>storage</md-icon>Tablas
             </router-link>
-          </md-list-item>-->
+          </md-list-item>
         </md-list>
-      </md-list-item>
+      </md-list-item>-->
       <md-list-item
         md-expand
         :class="{'hidden-text-menu': showIcons}"
@@ -139,5 +139,10 @@ export default {
 
 .md-list-expand-icon {
   margin-left: auto !important;
+}
+
+.sidebar .nav li .active,
+.off-canvas-sidebar .nav li .active {
+  color: #62c35c !important;
 }
 </style>

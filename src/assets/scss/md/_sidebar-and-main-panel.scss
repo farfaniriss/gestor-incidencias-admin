@@ -10,7 +10,7 @@
       padding: 10px 0px 10px 15px;
       border-radius: $border-radius-base;
 
-      >span {
+      > span {
         border-radius: $border-radius-base;
       }
     }
@@ -31,7 +31,7 @@
   .md-icon.md-theme-default.md-icon-font,
   .material-icons {
     color: #fff !important;
-    opacity: .8
+    opacity: 0.8;
   }
 
   .md-list {
@@ -59,7 +59,6 @@
     background-color: rgba(200, 200, 200, 0.4) !important;
   }
 
-
   .sidebar-wrapper {
     position: relative;
     height: calc(100vh - 75px);
@@ -80,7 +79,7 @@
     .nav {
       padding: 0;
 
-      [data-toggle="collapse"]~div>ul>li>a {
+      [data-toggle="collapse"] ~ div > ul > li > a {
         padding-left: 60px;
       }
 
@@ -90,7 +89,6 @@
         right: 18px;
       }
     }
-
   }
 
   .logo-tim {
@@ -108,8 +106,6 @@
     }
   }
 
-
-
   .nav {
     margin-top: 20px;
 
@@ -120,7 +116,6 @@
     }
 
     li {
-
       a {
         font-size: 1em;
         display: flex;
@@ -133,18 +128,18 @@
         width: auto;
       }
 
-      &:first-child>a {
+      &:first-child > a {
         margin: 0 15px;
       }
 
-      &:hover>a,
-      .dropdown:hover>a {
+      &:hover > a,
+      .dropdown:hover > a {
         background: rgba(200, 200, 200, 0.2);
         color: $black-color;
       }
 
       .active {
-        color: #FFFFFF !important;
+        color: #62c35c !important;
 
         .md-ripple i {
           opacity: 1;
@@ -264,7 +259,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: .85;
+    opacity: 0.85;
     top: 0;
     left: 0;
     z-index: 2;
@@ -293,20 +288,18 @@
 
 .off-canvas-sidebar {
   .nav {
-
-    >li>a,
-    >li>a:hover {
+    > li > a,
+    > li > a:hover {
       color: $white-color;
     }
 
-    >li>a:focus {
+    > li > a:focus {
       background: rgba(200, 200, 200, 0.2);
     }
   }
 }
 
 .perfect-scrollbar-on {
-
   .sidebar,
   .main-panel {
     height: 100%;
@@ -318,18 +311,18 @@
   position: relative;
   float: right;
   width: $sidebar-width;
-  @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+  @include transition(0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-  >.content {
+  > .content {
     padding: 30px 15px;
     min-height: calc(100vh - 123px);
   }
 
-  >.footer {
+  > .footer {
     border-top: 1px solid #e7e7e7;
   }
 
-  >.navbar {
+  > .navbar {
     margin-bottom: 0;
   }
 }

@@ -76,8 +76,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDeleteUniOpe = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDeleteUniOpe">Sí</v-btn>
+              <v-btn color="green darken-1" @click="dialogDeleteUniOpe = false">No</v-btn>
+              <v-btn color="green darken-1" @click="confirmDeleteUniOpe">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -87,8 +87,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDeleteSucursal = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDeleteSucursal">Sí</v-btn>
+              <v-btn color="green darken-1" @click="dialogDeleteSucursal = false">No</v-btn>
+              <v-btn color="green darken-1" @click="confirmDeleteSucursal">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -125,17 +125,16 @@
               :rows-per-page-items="rowsPerPageItems"
               rows-per-page-text="Filas por página"
               show-expand
-              expand
             >
               <template v-slot:items="props">
-                <tr @click="props.expanded = !props.expanded">
-                  <td>
+                <tr :active="props.expanded" @click="props.expanded = !props.expanded">
+                  <td class="text-xs-left">
                     <div class="datatable-cell-wrapper">{{ props.item.cNomUniOpe }}</div>
                   </td>
-                  <td>
+                  <td class="text-xs-left">
                     <div class="datatable-cell-wrapper">{{ props.item.cDescripcion }}</div>
                   </td>
-                  <td class="justify-start layout">
+                  <td class="text-xs-right">
                     <v-icon small class="mr-2" @click="editItemUniOpe(props.item)">edit</v-icon>
                     <v-icon small @click.stop="deleteItemUniOpe(props.item)">delete</v-icon>
                   </td>
@@ -164,7 +163,7 @@
                       <template v-slot:items="props">
                         <td class="text-xs-left">{{ props.item.cNomSurcursal }}</td>
                         <td class="text-xs-left">{{ props.item.cDescripcion }}</td>
-                        <td class="justify-start layout">
+                        <td class="text-xs-right">
                           <v-icon small class="mr-2" @click="editItemSucursal(props.item)">edit</v-icon>
                           <v-icon small @click.stop="deleteItemSucursal(props.item)">delete</v-icon>
                         </td>
@@ -207,12 +206,17 @@ export default {
     headersUniOpe: [
       { text: "Unidad Operativa", value: "cNomUniOpe" },
       { text: "Descripcion", value: "cDescripcion" },
-      { text: "Acciones", value: "cNomUniOpe", sortable: false }
+      { text: "Acciones", value: "cNomUniOpe", sortable: false, align: "right" }
     ],
     headersSucursal: [
       { text: "Sucursal", value: "cNomSucursal" },
       { text: "Descripcion", value: "cDescripcion" },
-      { text: "Acciones", value: "cNomSucursal", sortable: false }
+      {
+        text: "Acciones",
+        value: "cNomSucursal",
+        sortable: false,
+        align: "right"
+      }
     ],
     user: null,
     disabledEmpresa: false,

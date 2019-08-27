@@ -70,8 +70,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDeleteArea = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDeleteArea">Sí</v-btn>
+              <v-btn color="success" @click="dialogDeleteArea = false">No</v-btn>
+              <v-btn color="success" @click="confirmDeleteArea">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -81,8 +81,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDeleteCargo = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDeleteCargo">Sí</v-btn>
+              <v-btn color="green darken-1" @click="dialogDeleteCargo = false">No</v-btn>
+              <v-btn color="success" @click="confirmDeleteCargo">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -119,21 +119,25 @@
               :rows-per-page-items="rowsPerPageItems"
               rows-per-page-text="Filas por página"
               show-expand
-              expand
             >
               <template v-slot:items="props">
-                <tr @click="props.expanded = !props.expanded">
+                <tr :active="props.expanded" @click="props.expanded = !props.expanded">
                   <td>
                     <div class="datatable-cell-wrapper">{{ props.item.cNomArea }}</div>
                   </td>
-                  <td class="justify-start layout">
+                  <td class="text-xs-right">
                     <v-icon small class="mr-2" @click="editItemArea(props.item)">edit</v-icon>
                     <v-icon small @click.stop="deleteItemArea(props.item)">delete</v-icon>
                   </td>
                 </tr>
               </template>
               <template slot="expand" slot-scope="props">
-                <v-card>
+                <v-card
+                  flat
+                  elevation="2"
+                  color="#D1D1D1"
+                  style="background-color: #e8e8e8!important;"
+                >
                   <v-toolbar flat color="white">
                     <v-toolbar-title>Cargos</v-toolbar-title>
                     <v-divider class="mx-2" style="max-height: 0px !important;" inset vertical></v-divider>
@@ -155,7 +159,7 @@
                     >
                       <template v-slot:items="props">
                         <td class="text-xs-left">{{ props.item.cNomCargo }}</td>
-                        <td class="justify-start layout">
+                        <td class="text-xs-right">
                           <v-icon small class="mr-2" @click="editItemCargo(props.item)">edit</v-icon>
                           <v-icon small @click.stop="deleteItemCargo(props.item)">delete</v-icon>
                         </td>
@@ -197,11 +201,11 @@ export default {
     rowsPerPageItems: [10, 20, 30, 40],
     headersArea: [
       { text: "Area", value: "cNomArea" },
-      { text: "Acciones", value: "cNomArea", sortable: false }
+      { text: "Acciones", value: "cNomArea", sortable: false, align: "right" }
     ],
     headersCargo: [
       { text: "Cargo", value: "cNomCargo" },
-      { text: "Acciones", value: "cNomCargo", sortable: false }
+      { text: "Acciones", value: "cNomCargo", sortable: false, align: "right" }
     ],
     user: null,
     disabledEmpresa: false,
@@ -451,6 +455,7 @@ export default {
         .get(`/api/area/cargo?nIdEmpresa=${emp.nIdEmpresa}`)
         .then(res => {
           this.areas = res.data;
+          console.log(this.areas);
         })
         .catch(error => console.log(error));
     }
@@ -459,4 +464,11 @@ export default {
 </script>
 
 <style>
+.theme--light.v-table tbody tr[active] {
+  background: #b0e3aa !important;
+}
+
+.white {
+  background-color: #e8e8e8 !important;
+}
 </style>
