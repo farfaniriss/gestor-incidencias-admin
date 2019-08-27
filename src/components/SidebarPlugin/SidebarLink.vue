@@ -30,33 +30,18 @@
       >
         <md-icon>supervisor_account</md-icon>
         <p class="white-text">Administración</p>
-        <md-list slot="md-expand">
-          <md-list-item v-for="(permiso) in permisos" :key="permisosReload" @click="hideSidebar">
+        <md-list slot="md-expand" :key="permisosReload">
+          <md-list-item
+            v-for="(permiso, index) in permisos"
+            :key="index"
+            @click="hideSidebar(permiso.nIdMenuPermiso)"
+          >
+            <hr v-show="activeIndex == permiso.nIdMenuPermiso" width="4" size="26" style="background: #62c35c; border: none" />
             <router-link :to="permiso.cRuta" :class="{'pl-2': !showIcons}">
               <md-icon>{{permiso.cIcon}}</md-icon>
               {{permiso.cMenuNombre}}
             </router-link>
           </md-list-item>
-          <!-- <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/usuarios" :class="{'pl-2': !showIcons}">
-              <md-icon>person_add</md-icon>Usuario
-            </router-link>
-          </md-list-item>
-          <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/unidadoperativa" :class="{'pl-2': !showIcons}">
-              <md-icon>meeting_room</md-icon>U. Ope / Sucursal
-            </router-link>
-          </md-list-item>
-          <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/area" :class="{'pl-2': !showIcons}">
-              <md-icon>school</md-icon>Area / Cargo
-            </router-link>
-          </md-list-item>
-          <md-list-item @click="hideSidebar">
-            <router-link to="/administracion/planpago" :class="{'pl-2': !showIcons}">
-              <md-icon>payment</md-icon>Plan de pago
-            </router-link>
-          </md-list-item>-->
         </md-list>
       </md-list-item>
     </md-list>
@@ -81,7 +66,8 @@ export default {
       expandConfig: false,
       expandAdmin: false,
       permisos: [],
-      permisosReload: 0
+      permisosReload: 0,
+      activeIndex: -1
     };
   },
   mounted() {
@@ -92,7 +78,8 @@ export default {
     this.permisosReload++;
   },
   methods: {
-    hideSidebar() {
+    hideSidebar(index) {
+      this.activeIndex = index;
       if (
         this.autoClose &&
         this.$sidebar &&

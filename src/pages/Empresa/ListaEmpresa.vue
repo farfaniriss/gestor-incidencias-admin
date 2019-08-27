@@ -8,8 +8,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDelete = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDelete">Sí</v-btn>
+              <v-btn color="green darken-1" @click="dialogDelete = false">No</v-btn>
+              <v-btn color="green darken-1" @click="confirmDelete">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -176,7 +176,10 @@
               <template v-slot:items="props">
                 <td class="text-xs-left">{{ props.item.cRuc }}</td>
                 <td class="text-xs-left">{{ props.item.cRazonSocial }}</td>
-                <td class="text-xs-left">{{ props.item.cNomDescPlan }}</td>
+                <td
+                  class="text-xs-left"
+                  style="width: 500px !important; "
+                >{{ props.item.cNomDescPlan }}</td>
                 <td class="text-xs-left">{{ props.item.contacto.cDNI }}</td>
                 <td class="text-xs-left">{{ props.item.contacto.nombreCompleto }}</td>
                 <td class="text-xs-left">{{ props.item.contacto.cEmail }}</td>
@@ -217,7 +220,7 @@ export default {
     headers: [
       { text: "Ruc", value: "cRuc" },
       { text: "Razon social", value: "cRazonSocial" },
-      { text: "Plan Pago", value: "cNomDescPlan" },
+      { text: "Plan de Pago", value: "cNomDescPlan" },
       { text: "DNI Contacto", value: "contacto.cDNI" },
       { text: "Nombre Contacto", value: "contacto.nombreCompleto" },
       { text: "Email Contacto", value: "contacto.cEmail" },

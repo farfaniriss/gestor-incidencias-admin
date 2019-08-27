@@ -8,8 +8,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDelete = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDelete">Sí</v-btn>
+              <v-btn color="green darken-1" @click="dialogDelete = false">No</v-btn>
+              <v-btn color="green darken-1" @click="confirmDelete">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

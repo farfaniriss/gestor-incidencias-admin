@@ -139,7 +139,7 @@
                   style="background-color: #e8e8e8!important;"
                 >
                   <v-toolbar flat color="white">
-                    <v-toolbar-title>Cargos</v-toolbar-title>
+                    <v-toolbar-title style="font-size: 17px;">{{ props.item.cNomArea }} > Cargos</v-toolbar-title>
                     <v-divider class="mx-2" style="max-height: 0px !important;" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <v-btn
@@ -150,6 +150,7 @@
                   </v-toolbar>
                   <div :key="cargoKey">
                     <v-data-table
+                      class="nested-table"
                       :headers="headersCargo"
                       :items="props.item.cargos"
                       :rows-per-page-items="rowsPerPageItems"
@@ -465,10 +466,10 @@ export default {
 
 <style>
 .theme--light.v-table tbody tr[active] {
-  background: #b0e3aa !important;
+  background: #76d058 !important;
 }
 
 .white {
-  background-color: #e8e8e8 !important;
+  background-color: #ffffff !important;
 }
 </style>

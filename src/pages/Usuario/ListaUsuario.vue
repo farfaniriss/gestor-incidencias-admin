@@ -8,8 +8,8 @@
             <v-card-text>¿Está seguro de eliminar el registro?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="dialogDelete = false">No</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="confirmDelete">Sí</v-btn>
+              <v-btn color="green darken-1" @click="dialogDelete = false">No</v-btn>
+              <v-btn color="green darken-1" @click="confirmDelete">Sí</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -340,8 +340,12 @@ export default {
       { text: "Fecha de nacimiento", value: "dFecNacimiento", width: "1%" },
       { text: "Email", value: "cEmail", width: "1%" },
       { text: "Celular", value: "cCelular", width: "1%" },
-      { text: "Empresa", value: "cRazonSocial", width: "1%" },
-      { text: "Uni. Operativa", value: "cNomUniOpe", width: "1%" },
+      {
+        text: "Empresa                                      .",
+        value: "cRazonSocial",
+        width: "1%"
+      },
+      { text: "Unidad Operativa", value: "cNomUniOpe", width: "1%" },
       { text: "Sucursal", value: "cNomSurcursal", width: "1%" },
       { text: "Area", value: "cNomArea", width: "1%" },
       { text: "Cargo", value: "cNomCargo", width: "1%" },

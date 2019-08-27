@@ -19,33 +19,49 @@
               <label>Search...</label>
             </md-autocomplete>
           </div>-->
-          <md-list>
-            <md-list-item href="#/" class="dropdown">
-              <drop-down>
-                <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="material-icons">notifications</i>
-                  <span class="notification">2</span>
-                  <p class="hidden-lg hidden-md">Notifications</p>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li>
-                    <a href="#">Jhon Whitman respondio a tu comentario</a>
-                  </li>
-                </ul>
-              </drop-down>
-            </md-list-item>
-            <md-list-item>Bienvenido {{ user.cNombre }}</md-list-item>
-            <md-list-item>Empresa autorizada: {{ user.cRazonSocial }}</md-list-item>
-            <md-list-item href="#/administracion/usuario">
-              <i class="material-icons">person</i>
-              <p class="hidden-lg hidden-md">Perfil</p>
-              {{ user.cNomNivel }}
-            </md-list-item>
-            <md-list-item @click="logout">
-              <i class="material-icons">exit_to_app</i>
-              <p class="hidden-lg hidden-md">Salir</p>
-            </md-list-item>
-          </md-list>
+          <v-list two-line style="background: transparent; color: white">
+            <div>
+              <md-list>
+                <md-list-item>
+                  <div style="color: white !important">Bienvenid@ {{ user.cNombre }}</div>
+                </md-list-item>
+                <md-list-item
+                  href="#/administracion/usuario"
+                  style="background: transparent; color: white"
+                >
+                  <i class="material-icons" style="background: transparent; color: white">person</i>
+                  <p class="hidden-lg hidden-md">Perfil</p>
+                </md-list-item>
+                <md-list-item href="#/" class="dropdown">
+                  <drop-down>
+                    <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
+                      <i
+                        class="material-icons"
+                        style="background: transparent; color: white"
+                      >notifications</i>
+                      <span class="notification">2</span>
+                      <p class="hidden-lg hidden-md">Notificaciones</p>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li>
+                        <a href="#">Jhon Whitman respondio a tu comentario</a>
+                      </li>
+                    </ul>
+                  </drop-down>
+                </md-list-item>
+                <md-list-item @click="logout">
+                  <i
+                    class="material-icons"
+                    style="background: transparent; color: white"
+                  >exit_to_app</i>
+                  <p class="hidden-lg hidden-md">Salir</p>
+                </md-list-item>
+              </md-list>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              <v-list-tile>Empresa autorizada: {{ user.cRazonSocial }}</v-list-tile>
+            </div>
+          </v-list>
         </div>
       </div>
     </div>
@@ -96,5 +112,18 @@ export default {
     position: fixed;
     margin-left: 270px;
   }
+}
+
+.v-list {
+  padding: 0px 0 !important;
+}
+
+.md-speed-dial .md-button {
+  margin: 14px 0 !important;
+}
+
+.md-list-item .md-list-item-container .md-ripple {
+  padding: 10px 0px 0px 5px !important;
+  border-radius: 3px;
 }
 </style>

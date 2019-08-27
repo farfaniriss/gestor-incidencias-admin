@@ -1,6 +1,6 @@
 .md-toolbar {
   min-height: 56px;
-  padding: 10px 15px;
+  padding: 0px 15px;
   border-radius: 3px;
   position: fixed !important;
   width: 100% !important;
@@ -37,15 +37,16 @@
   }
 
   .navbar-nav {
-    > li > .dropdown-menu {
+    >li>.dropdown-menu {
       margin-top: -20px;
     }
 
-    > li.open > .dropdown-menu {
+    >li.open>.dropdown-menu {
       margin-top: 0;
     }
 
-    > .active > a {
+    >.active>a {
+
       &,
       &:hover,
       &:focus {
@@ -53,7 +54,8 @@
       }
     }
 
-    > .disabled > a {
+    >.disabled>a {
+
       &,
       &:hover,
       &:focus {
@@ -180,7 +182,7 @@
       border: 1px solid;
       border-radius: 1px;
 
-      & + .icon-bar {
+      &+.icon-bar {
         margin-top: 4px;
       }
     }
@@ -195,13 +197,13 @@
     color: inherit !important;
     background-color: transparent !important;
 
-    &:hover .md-list-item > a,
-    &:focus .md-list-item > a,
-    & > a:hover {
+    &:hover .md-list-item>a,
+    &:focus .md-list-item>a,
+    &>a:hover {
       background-color: transparent !important;
     }
 
-    .md-list-item > a:not(:last-child) {
+    .md-list-item>a:not(:last-child) {
       margin-right: 5px;
     }
   }

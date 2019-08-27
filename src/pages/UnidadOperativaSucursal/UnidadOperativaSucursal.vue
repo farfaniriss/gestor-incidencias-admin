@@ -143,7 +143,9 @@
               <template slot="expand" slot-scope="props">
                 <v-card>
                   <v-toolbar flat color="white">
-                    <v-toolbar-title>Sucursales</v-toolbar-title>
+                    <v-toolbar-title
+                      style="font-size: 17px;"
+                    >{{ props.item.cNomUniOpe }} > Sucursales</v-toolbar-title>
                     <v-divider class="mx-2" style="max-height: 0px !important;" inset vertical></v-divider>
                     <v-spacer></v-spacer>
                     <v-btn
@@ -154,6 +156,7 @@
                   </v-toolbar>
                   <div :key="sucursalKey">
                     <v-data-table
+                      class="nested-table"
                       :headers="headersSucursal"
                       :items="props.item.sucursales"
                       :rows-per-page-items="rowsPerPageItems"
@@ -496,4 +499,8 @@ export default {
 </script>
 
 <style>
+.nested-table,
+.nested-table .theme--light.v-table {
+  background-color: #dedede;
+}
 </style>

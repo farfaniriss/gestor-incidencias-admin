@@ -1,5 +1,16 @@
 <template>
   <div>
+    <v-toolbar
+      height="100px"
+      style="display: flex; align-items: center; justify-content: center;"
+      flat
+      absolute
+      color="#474A4F"
+    >
+      <v-container align-content-center justify-center>
+        <img :src="header" width="250" />
+      </v-container>
+    </v-toolbar>
     <div :style="headerStyle">
       <div :style="containerStyle">
         <div class="md-size-100 md-small-size-100 md-xsmall-size-100 md-medium-size-100">
@@ -52,6 +63,16 @@
         </div>
       </div>
     </div>
+    <v-footer
+      absolute
+      style="display: flex; align-items: center; justify-content: center;"
+      height="100px"
+      color="#474A4F"
+    >
+      <div
+        style="color: white; font-weight: 100;"
+      >Copyright &copy; {{ new Date().getFullYear() }} — Jammtech. Todos los derechos reservados.</div>
+    </v-footer>
   </div>
 </template>
 
@@ -82,7 +103,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/profile_city.jpg")
+      default: require("@/assets/img/logo_login.png")
     },
     email: {
       type: String,
@@ -95,7 +116,7 @@ export default {
   computed: {
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`,
+        backgroundColor: "#7AC043",
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
