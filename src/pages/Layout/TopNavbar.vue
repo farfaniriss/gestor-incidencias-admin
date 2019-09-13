@@ -10,7 +10,7 @@
           :class="{ toggled: $sidebar.showSidebar }"
           @click="toggleSidebar"
         >
-          <i class="fas fa-bars" style="color: #434c52 !important; width: 100%"></i>
+          <i class="fas fa-bars"></i>
         </md-button>
 
         <div class="md-collapse">
@@ -125,5 +125,10 @@ export default {
 .md-list-item .md-list-item-container .md-ripple {
   padding: 10px 0px 0px 5px !important;
   border-radius: 3px;
+}
+
+.md-button:not(.md-just-icon) .md-button-content i {
+    color: #474A4F !important; 
+    font-size: 1.3rem !important;
 }
 </style>

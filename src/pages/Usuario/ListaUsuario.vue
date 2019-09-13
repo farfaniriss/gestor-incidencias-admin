@@ -804,7 +804,7 @@ export default {
 }
 
 .v-list__tile {
-  font-size: 12px !important;
+  font-size: 14px !important;
   height: 30px !important;
 }
 

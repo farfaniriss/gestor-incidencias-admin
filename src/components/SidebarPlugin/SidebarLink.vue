@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-list class="nav" md-expand-single="true">
-      <md-list-item @click="hideSidebar" :class="{'hidden-text-menu': showIcons}">
+      <md-list-item @click="expandAdmin = false" :class="{'hidden-text-menu': showIcons}">
         <router-link to="/inicio" class="menu-router-link">
           <md-icon>border_all</md-icon>Inicio
         </router-link>
@@ -36,7 +36,11 @@
             :key="index"
             @click="hideSidebar(permiso.nIdMenuPermiso)"
           >
-            <hr v-show="activeIndex == permiso.nIdMenuPermiso" width="4" size="26" style="background: #62c35c; border: none" />
+            <hr
+              width="4"
+              size="40"
+              style="background: #62c35c; border: none; margin-top: -20px; margin-bottom: -5px;margin-left: 10px;"
+            />
             <router-link :to="permiso.cRuta" :class="{'pl-2': !showIcons}">
               <md-icon>{{permiso.cIcon}}</md-icon>
               {{permiso.cMenuNombre}}

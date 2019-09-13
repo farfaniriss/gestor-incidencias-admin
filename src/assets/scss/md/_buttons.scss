@@ -20,7 +20,7 @@
   }
 
   &:not(.md-just-icon) .md-button-content i {
-    font-size: 1.1rem !important;
+    font-size: 1.1rem;
     height: 17px;
   }
 
@@ -58,10 +58,10 @@
     .open>&.dropdown-toggle:focus,
     .open>&.dropdown-toggle:hover {
       background-color: transparent !important;
-      color: #434c52 !important;
+      color: #474A4F !important;
 
       i {
-        color: #434c52 !important;
+        color: #474A4F !important;
       }
     }
 

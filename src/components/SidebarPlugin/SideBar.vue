@@ -1,9 +1,9 @@
 <template>
   <div class="sidebar" :data-color="activeColor" :style="sidebarStyle">
     <div class="logo">
-      <a href="#" :class="[showIcons ? 'ml-1' : 'ml-6','simple-text logo-mini']">
-        <div class="logo-img">
-          <img :src="imgLogo" alt>
+      <a href="#" :class="[showIcons ? 'ml-1' : 'ml-6','simple-text logo-md']">
+        <div class="logo-new">
+          <img :src="imgLogo" alt />
         </div>
       </a>
     </div>
@@ -34,7 +34,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: "https://i.imgur.com/AF80OFd.png"
+      default: require("@/assets/img/logo_login.png")
     },
     activeColor: {
       type: String,
@@ -69,7 +69,7 @@ export default {
   computed: {
     sidebarStyle() {
       return {
-        backgroundColor: `#434c52`
+        backgroundColor: `#474A4F`
       };
     }
   }
@@ -82,11 +82,27 @@ export default {
   }
 
   .ml-6 {
-    margin-left: 3.5rem !important;
+    margin-left: 3rem !important;
   }
 
   .ml-1 {
     margin-left: -1.3rem !important;
+  }
+
+  .logo-md {
+    float: left;
+    width: 130px;
+    text-align: center;
+    margin-right: 11px;
+    position: relative;
+    top: 6px;
+  }
+  .logo-new {
+    height: 100px;
+    width: auto;
+    display: inline-block;
+    background: transparent;
+    text-align: center;
   }
 }
 </style>
