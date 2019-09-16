@@ -23,7 +23,7 @@
             <div>
               <md-list>
                 <md-list-item>
-                  <div style="color: white !important">Bienvenid@ {{ user.cNombre }}</div>
+                  <div style="color: white !important">Bienvenido {{ user.cNombre }}</div>
                 </md-list-item>
                 <md-list-item
                   href="#/administracion/usuario"

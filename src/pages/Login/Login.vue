@@ -25,10 +25,8 @@
             </v-dialog>
           </md-card>
           <md-card v-else class="md-card-login" :class="{ 'md-card-hidden': cardHidden }">
-            <md-card-header class="md-card-header-green">
-              <h4 class="card-title">Iniciar sesión en su cuenta</h4>
-            </md-card-header>
             <md-card-content>
+               <h4 class="card-title">Iniciar sesión en su cuenta</h4>
               <!-- <p class="description">Iniciar sesión en su cuenta</p> -->
               <v-form v-model="valid" ref="form" lazy-validation>
                 <md-field class="md-form-group">
